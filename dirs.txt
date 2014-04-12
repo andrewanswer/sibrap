@@ -1,0 +1,28 @@
+Каталоги
+========
+
+/bonus - доп детали, помогающие сделать SibRap
+/electronic - RAMPS+стол разводка
+/export/print - STL детали для печати SibRap на 3D-принтере
+/sibrap/abs - детали, обязательно печатаемые на 3D-принтере
+/sibrap/case - металлический корпус, чертежи
+/sibrap/ftoroplast - фторопластовый термобарьер, чертежи
+/sibrap/laser - чертежи деталей, вырезаемых лазером, DXF
+/sibrap/laserblocks - DXF для лазерной резки
+/sibrap/metal - металлические детали, чертежи
+/sibrap/table - деревянная и СМЛ (стекломагниевый лист) часть стола
+
+Directories structure
+=====================
+
+/bonus - additional details which help to produce SibRap
+/electronic - RAMPS+table layout
+/export/print - STL parts to print SibRap on 3D-printer fully
+/sibrap/abs - 3D-printed parts without alternate (still)
+/sibrap/case - metal case drawings
+/sibrap/ftoroplast - PTFE thermal barrier drawings
+/sibrap/laser - DXF laserparts drawings
+/sibrap/laserblocks - DXF for lasercut
+/sibrap/metal - metal parts drawings
+/sibrap/table - wood & SML (glass-magnesium sheet) table
+

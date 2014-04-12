@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with sK1/UniConvertor (http://sk1project.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="595.276pt"
+   height="841.89pt"
+   viewBox="0 0 595.276 841.89"
+   fill-rule="evenodd"
+   id="svg4055"
+   version="1.1"
+   inkscape:version="0.48.3.1 r9886"
+   sodipodi:docname="part16.svg">
+  <metadata
+     id="metadata4233">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1069"
+     inkscape:window-height="742"
+     id="namedview4231"
+     showgrid="false"
+     inkscape:zoom="0.63429547"
+     inkscape:cx="500.50023"
+     inkscape:cy="698.59474"
+     inkscape:window-x="65"
+     inkscape:window-y="24"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg4055" />
+  <defs
+     id="defs4057">
+    <marker
+       id="ArrowEnd"
+       viewBox="0 0 10 10"
+       refX="0"
+       refY="5"
+       markerUnits="strokeWidth"
+       markerWidth="4"
+       markerHeight="3"
+       orient="auto">
+      <path
+         d="M 0 0 L 10 5 L 0 10 z"
+         id="path4060" />
+    </marker>
+    <marker
+       id="ArrowStart"
+       viewBox="0 0 10 10"
+       refX="10"
+       refY="5"
+       markerUnits="strokeWidth"
+       markerWidth="4"
+       markerHeight="3"
+       orient="auto">
+      <path
+         d="M 10 0 L 0 5 L 10 10 z"
+         id="path4063" />
+    </marker>
+  </defs>
+  <path
+     style="fill:#00ccff;stroke:#000000;stroke-width:1"
+     d="m 0.5,699.64004 119.07,0 0,141.75 -119.07,0 0,-141.75 z m 40.852,14.175 22.680003,0 0,113.4 -22.680003,0 0,-113.4 z m 49.715003,1.622 c 9.079997,0 16.442997,7.363 16.442997,16.443 0,9.08 -7.363,16.443 -16.442997,16.443 -9.08,0 -16.443,-7.363 -16.443,-16.443 0,-9.08 7.363,-16.443 16.443,-16.443 z m 0,73.99 8.84,5.104 8.839997,5.104 0,10.208 0,10.207 -8.839997,5.104 -8.84,5.104 -8.84,-5.104 -8.84,-5.104 0,-10.207 0,-10.208 8.84,-5.104 8.84,-5.104 z"
+     id="path4227"
+     inkscape:connector-curvature="0" />
+</svg>
