@@ -1,0 +1,1 @@
+import("part06.stl");
