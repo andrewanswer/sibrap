@@ -27,8 +27,8 @@ module BIGblock() {
 //#	translate([32,39,-1])cylinder(6.4,r=4.7,$fn=40);
 //#	translate([32,39,10])cylinder(9,r=4.7,$fn=40);
 //#	translate([35,32.4,-1])cube([6,13.2,20]);
-//	translate ([32,39,-1]) cylinder(20,r=9.4/2,$fa=60); // плотно сидит
-	translate ([32,39,-1]) cylinder(20,r=10.2/2,$fa=60); // свободно сидит
+//	translate ([32,39,-1]) cylinder(20,r=9.4/2,$fn=6); // плотно сидит
+	translate ([32,39,-1]) cylinder(20,r=10.2/2,$fn=6); // свободно сидит
 
 	// Отверстия для извлечения подшипников
 	translate([28,6,-10]) cylinder(20,r=1,$fn=40);
@@ -42,17 +42,17 @@ module BIGblock() {
 
 	// отверстие 1
 	translate([-5,15,15.5])rotate([0,90,0])cylinder(20,r=M3,$fn=15);
-	translate([12,15,15.5])rotate([0,90,0])cylinder(5,r=6.5/2,$fa=60);
+	translate([12,15,15.5])rotate([0,90,0])cylinder(5,r=6.5/2,$fn=6);
 
 	// отверстие 2
 	translate([0,35,0]) {
 		translate([-5,0,15.5])rotate([0,90,0])cylinder(20,r=M3,$fn=15);
-	translate([12,0,15.5])rotate([0,90,0])cylinder(5,r=6.5/2,$fa=60);
+	translate([12,0,15.5])rotate([0,90,0])cylinder(5,r=6.5/2,$fn=6);
 	}
 	// отверстие 3 в прижиме
 	translate([-9.5,10,-6.6]) {
 		translate([-5,15,15.8])rotate([0,90,0])cylinder(20,r=M3,$fn=15);
-	translate([12,15,15.8])rotate([0,90,0])cylinder(4,r=6.8/2,$fa=60);
+	translate([12,15,15.8])rotate([0,90,0])cylinder(4,r=6.8/2,$fn=6);
 	}
 	// сквозное отверстие в детали
 		translate([-14.5,25,3])rotate([0,90,0])cylinder(60,r=M3,$fn=15);
