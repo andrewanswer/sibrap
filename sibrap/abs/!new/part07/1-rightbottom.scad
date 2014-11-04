@@ -1,18 +1,13 @@
-
 module BIGblock() {
-
-module block() {
-
-M3 = 3.2/2;
-
-difference() {
-
-union() {
-	translate([-2,0,0]) cube([43.8,50,18]);
-	translate([-2,10,0])	cube([2,30,18]);
-// шапка над подшипником
-	translate ([22.1,0,-9]) cube([19.7,23,9]);
-}
+	module block() {
+		M3 = 3.2/2;
+		difference() {
+		union() {
+			translate([-2,0,0]) cube([43.8,50,18]);
+			translate([-2,10,0])	cube([2,30,18]);
+			// шапка над подшипником
+			translate ([22.1,0,-9]) cube([19.7,23,9]);
+		}
 
 //	translate([-10,-10,-40])cube([100,100,50]);
 //	translate([-10,-10,13])cube([100,100,50]);
@@ -23,20 +18,20 @@ union() {
 	translate([13.9,4.9,-1])cube([8.2,40.2,23]);
 
 // линейный подшипник 24 * 15 * 8
-	translate([32,11.5,-1]) cylinder(20,r=9.2/2,$fn=40);
+	translate([32,11,-1]) cylinder(20,r=9.2/2,$fn=40);
 
 //translate([32,11,-4]) cylinder(26,r=15.4/2,$fn=40); // для инверсии входа подшипника
-	translate([32,11.5,-11]) cylinder(26,r=15.4/2,$fn=40);
+	translate([32,11,-11]) cylinder(26,r=15.4/2,$fn=40);
 
 	// Отверстия для извлечения подшипников
-	translate([28,6.2,5]) rotate([0,0,0]) cylinder(20,r=1,$fn=40);
-	translate([36.4,16.4,5]) rotate([0,0,0]) cylinder(20,r=1,$fn=40);
+	translate([28,6,5]) cylinder(20,r=1,$fn=40);
+	translate([36,16,5]) cylinder(20,r=1,$fn=40);
 
 	// гайка  M5
 //#	translate([32,39,-1])cylinder(6.4,r=4.7,$fn=40);
 //#	translate([32,39,10])cylinder(9,r=4.7,$fn=40);
-//#	translate([35,32.4,-1])cube([6,13.2,20]);
-	translate ([32,38.5,-1]) cylinder(20,r=9.4/2,$fa=60);
+//#translate([35,32.4,-1])cube([6,13.2,20]);
+	translate ([32,39,-1]) cylinder(20,r=9.4/2,$fa=60);
 
 
 	// направляющая - слабо держит
@@ -44,8 +39,6 @@ union() {
 	// направляющая - меньше диаметр отверстия
 #	translate([9,-1,9])rotate([-90,0,0])cylinder(52,r=8.3/2,$fn=30);
 	// вырезы у направляющей
-//	translate([-1,50,-1])cube([10,20,20]);
-//	translate([-1,-1,-1])cube([10,11,20]);
 	translate([8,-1,8])cube([1,52,11]);
 
 	// отверстие 1
@@ -67,11 +60,11 @@ union() {
 }
 }
 
-// шапка над гайкой, отверстие в ней
-		difference() {
-	translate ([23,0,16]) cube([18,20,2]);
-	translate ([32,11.5,10]) cylinder(10,r=6/2,$fn=100);
-}
+	// шапка над гайкой, отверстие в ней
+	difference() {
+		translate ([23,0,16]) cube([18,20,2]);
+		translate ([32,11,10]) cylinder(10,r=6/2,$fn=100);
+	}
 	translate ([23,0,15.4]) cube([18,20,0.6]);
 
 // мост над трубкой - не нужен при верной ориентации прохода втулки
@@ -82,6 +75,5 @@ rotate([180,0,0])
 block();
 }
 
-// не выводим итоговый результат //
+// расстояние между осью подшипника и осью гайки должно быть 28 мм
  BIGblock();
-

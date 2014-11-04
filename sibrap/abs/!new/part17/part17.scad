@@ -59,7 +59,8 @@ translate([-86,45,14]) rotate([0,0,45]) cube([10,10,5]);}
 
 
 // freecad positioning
-//translate([24.5,-32,0])rotate([-90,180,0])
+//Angle 180 XYZ 011
+//translate([-24.5,-32,0])rotate([-90,180,0])
 mirror([1,0,0])
 difference() {
    // main part
