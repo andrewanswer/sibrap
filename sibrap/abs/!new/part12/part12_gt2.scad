@@ -21,29 +21,30 @@ module beltclamp(z,nut,belt) {
 		}
 		if (belt) {
 			translate([0,0,z-hr1]) cube([b,10,z],true);
-			for(i=[0:5])translate([0,-5+i*2,z-hr2]) cube([b,xr1,z],true);
-			translate([0,10,0])rotate([90,0,0])cylinder(20,r=r0);
+			for (i=[0:5]) translate([0,-5+i*2,z-hr2]) cube([b,xr1,z],true);
+			translate([0,10,0]) rotate([90,0,0]) cylinder(20,r=r0);
 			translate([0,-2,0]) rotate([90,90,0]) cylinder(5,r=6.6/2,$fn=6);
 		}
 	}
 }
 
+//#translate([8,0,-5]) cylinder(25,r=r0);
 module stack(hh) {
-	beltclamp(8+hh,false,true);
-	translate([0,0,8+hh]) beltclamp(5,true,false);
+	beltclamp(9+hh,false,true);
+	translate([0,0,9+hh]) beltclamp(6,true,false);
 	translate([0,0,-hh-2]) beltclamp(2);
 }
 
 module printing(hh) {
-	beltclamp(8+hh,false,true);
-	translate([0,-h1-5,0]) beltclamp(5,true,false);
+	beltclamp(9+hh,false,true);
+	translate([0,-h1-5,0]) beltclamp(6,true,false);
 	translate([0,h1+5,0]) beltclamp(2);
 }
 
 // for freecad positioning
 // 3 - толщина стола
-//stack(3);
+stack(3);
 
 // for printing
 // 3 - толщина стола
-printing(3);
+//printing(3);
