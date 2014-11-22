@@ -31,12 +31,16 @@ x6=14;
 z6=5;
 
 module nut() {
-	translate([0,0,8.75])rotate([90,0,90])cylinder(z6,r=7/2,$fa=60);
+	translate([0,0,8.75])rotate([90,0,90])cylinder(z6,r=7/2,$fn=6);
 }
 
 // freecad positioning
 //translate([15.5,13,17.5])rotate([-90,-90,180])
 mirror([1,0,0])
+// false=metal barrier, true=ftoroplast
+part18(false);
+
+module part18(barrier) {
 union() {
 difference() {
 	// main part
@@ -71,7 +75,7 @@ difference() {
 	%translate([x5,y6,10])cylinder(7,r=11,$fn=50);
 
 	// part19 nut
-	translate([x-4.5,y2-7,z2])rotate([-90,0,0])cylinder(y3,r=z3/2,$fa=60);
+	translate([x-4.5,y2-7,z2])rotate([-90,0,0])cylinder(y3,r=z3/2,$fn=6);
 	translate([x-6,y2-7,z2-z3/2+0.25])cube([7,y3,z3-0.5]);
 	translate([x-3,y4-1,z2])rotate([-90,0,0])cylinder(y5,r=d1/2,$fn=20);
 
@@ -83,12 +87,14 @@ difference() {
 	translate([x1,y2,z2])rotate([0,90,0])cylinder(x-x1+1,r=d5/2,$fn=20);
 	translate([-1,y22,z22])rotate([0,90,0])cylinder(x1+1,r=d5/2,$fn=20);
 
+	if (barrier) {
 	// hotend
 	translate([-1,y22,z22])rotate([0,90,0])cylinder(x6,r=d6/2,$fn=50);
 
 	// hotend nuts
 	for(i=[0:2])translate([-1,y22,z2])rotate([120*i+60,0,0])nut();
 	//translate([-1,y22-13.5,z-z4+1])rotate([0,90,0])cube([7.15,8,z6-.2]);
+	}
 }
 
 // bearing cap & support
@@ -103,5 +109,6 @@ difference() {
 	translate([12,2,0.5])cube([25,5,9]);
 	translate([-1,y22,z22])rotate([0,90,0])cylinder(x6,r=d6/2,$fn=50);
 	translate([x5,y6,7])cylinder(13,r=4,$fn=50);
+}
 }
 }
