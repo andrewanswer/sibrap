@@ -20,7 +20,7 @@ WallT = 2.1	;	// Wall thickness (mm)
 // PCB supports are defined by the distance to the underside of the PCB, from the top external of the box.
 // Supports for the PCB are ribs above and below
 PCBgap = 2 ;	// Slot size for PCB to slide into
-PCB1 = 33 ;		// Position of first PCB (0 if none)
+PCB1 = 0;//33 ;		// Position of first PCB (0 if none)
 PCB2 = 0;		// Position of second PCB (0 if none)
 PCB3 = 0 ;		// Position of third PCB (0 if none)
 
@@ -48,11 +48,61 @@ ScrewW = 6 ;	// Width of Screw block, and of countersink in lid
 
 Allow = 0.5;		// Allowance for fit of the lid. A gap around it, and elsewhere.
 
-
+// http://robocontroller.ru/news/chertezhi_i_razmery_plat_arduino/2013-07-05-24
+// http://robocontroller.ru/files/arduino/arduino_mega_2560_dimensions.pdf
+// TODO: enter sizes
+//Arduino = [15.24]
 // *******************************  View / render options ********************************
 
+// FreeCad positioning
+// ------box part 1------
+a=25;
+b=9;
+difference() {
+pbox();
+translate([-OutL/2+a,b,-OutD/2-1])cylinder(r=1.5,h=OutD,$fn=16);
+translate([-OutL/2+a+82,b,-OutD/2-1])cylinder(r=1.5,h=OutD,$fn=16);
+}
+
+// ------end box part 1------
+
+// FreeCad positioning
+// ------box part 2------
+
+/*
+// brim width
+dr=3;
+// brim height
+dh=1;
+
+rotate([0,180,0]) {
+difference() {
+union() {
+pboxlid();
+translate([0,0,-OutD/2+WallT])holes(2.3+dr,3.5+dr,dh);
+}
+translate([0,0,-OutD/2-1]) holes(2.3,3.5,OutD);
+}
+}
+
+module holes(r1,r2,h) {
+// table
+translate([40,15,0])rbox(r2,1,h);
+// motors
+rbox(r2,35,h);
+// endstops + cooler
+translate([-40,15,0])rbox(r1,14,h);
+}
+
+module rbox(r,w,h) {
+translate([-w/2,0,0])cylinder(r=r,h=h,$fn=40);
+translate([-w/2,-r,0])cube([w,2*r,h]);
+translate([w/2,0,0])cylinder(r=r,h=h,$fn=40);
+}
+// ------end box part 2------
+*/
 // Print Box on on it's own
-translate([0,0,OutL/2-WallT]) rotate([0,-90,90]) pbox() ;  	// Rotate and position for printing
+//translate([0,0,OutL/2-WallT]) rotate([0,-90,90]) pbox() ;  	// Rotate and position for printing
 
 
 // Print Lid on it's own
@@ -173,7 +223,7 @@ module pbox() {
 		if (PCB3 != 0) {
 			support(OutD/2 - PCB3) ;	// Support under the PCB
 			support(OutD/2 - (PCB3 - Sdepth - PCBgap)) ;	// Support over the PCB
-		} 
+		}
 		if (Screws1 != 0) {
 			translate([OutL/2-WallT,OutW/2-ScrewW/2-Allow,OutD/2-Screws1]) rotate([0,-90,0]) sblock(ScrewW,ScrewH,ScrewD) ;
 			translate([OutL/2-WallT,-(OutW/2-ScrewW/2)+Allow,OutD/2-Screws1]) rotate([0,90,180]) sblock(ScrewW,ScrewH,ScrewD) ;
