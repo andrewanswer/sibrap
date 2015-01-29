@@ -48,10 +48,19 @@ ScrewW = 6 ;	// Width of Screw block, and of countersink in lid
 
 Allow = 0.5;		// Allowance for fit of the lid. A gap around it, and elsewhere.
 
-// http://robocontroller.ru/news/chertezhi_i_razmery_plat_arduino/2013-07-05-24
-// http://robocontroller.ru/files/arduino/arduino_mega_2560_dimensions.pdf
-// TODO: enter sizes
-//Arduino = [15.24]
+// http://blog.arduino.cc/2011/01/05/nice-drawings-of-the-arduino-uno-and-mega-2560/
+// or sibrap/specs/arduino_mega_drawing.svg
+// sizes in mils (0.001")
+k=25.4/1000;
+Arduino1 = [550,100]*k;
+Arduino2 = [3800,100]*k;
+Arduino3 = [600,2000]*k;
+Arduino4 = [3550,2000]*k;
+
+echo(Arduino1);
+echo(Arduino2);
+echo(Arduino3);
+echo(Arduino4);
 // *******************************  View / render options ********************************
 
 // FreeCad positioning
@@ -60,8 +69,17 @@ a=25;
 b=9;
 difference() {
 pbox();
-translate([-OutL/2+a,b,-OutD/2-1])cylinder(r=1.5,h=OutD,$fn=16);
-translate([-OutL/2+a+82,b,-OutD/2-1])cylinder(r=1.5,h=OutD,$fn=16);
+translate([-OutL/2+a,b,-OutD/2-1]){
+cylinder(r=1.5,h=OutD,$fn=16);
+translate([82,0,0])cylinder(r=1.5,h=OutD,$fn=16);
+}
+translate([-OutL/2+6,-OutW/2+10,-OutD/2-1]){
+translate(Arduino1)cylinder(r=1.5,h=OutD,$fn=16);
+translate(Arduino2)cylinder(r=1.5,h=OutD,$fn=16);
+translate(Arduino3)cylinder(r=1.5,h=OutD,$fn=16);
+translate(Arduino3)translate([0,0,WallT+1])specnut();
+//translate(Arduino4)cylinder(r=1.5,h=OutD,$fn=16);
+}
 }
 
 // ------end box part 1------
@@ -114,6 +132,13 @@ translate([w/2,0,0])cylinder(r=r,h=h,$fn=40);
 //translate([0,OutD/2+5,OutL/2-WallT]) rotate([0,-90,90]) pbox() ;
 
 
+module specnut() {
+difference() {
+cylinder(10,r=6.6/2,$fn=6);
+translate([0,0,-0.1])cylinder(10.2,r=3/2,$fn=16);
+}
+}
+
 // ***************  Your modules to add apertures to  ***************************
 
 // These two modules are where you can put function calls to create holes
@@ -165,11 +190,13 @@ module HoleInLid() {
 module HoleInEnd() {
 //	endround(x,y,w);		// for round holes, X & Y give the centre
 //	endrect(x,y,w,d);		// for rectangular holes, X & Y give the top left corner
-	endrect(38,22,24,10);		// Power connector
-	endrect(43,19,2.5,4) ;		// 'teeth'
-	endrect(54.5,19,2.5,4) ;
+//	endrect(38,22,24,10);		// Power connector
+//	endrect(43,19,2.5,4) ;		// 'teeth'
+//	endrect(54.5,19,2.5,4) ;
+	translate([0,0,6]) {
 	endrect(43,31,10,14) ;		// DC socket
 	endrect(11,33,14,12);		// USB connector
+	}
 
 	// Vent slots
 	endrect(3.5,7,12.9,4);
@@ -184,9 +211,8 @@ module HoleInEnd() {
 
 	endrect(3.5,19.4,12.9,4);
 	endrect(18.5,19.4,12.9,4);
-
-	endrect(3.5,25.6,12.9,4);
-	endrect(18.5,25.6,12.9,4);
+	endrect(33.5,19.4,12.9,4);
+	endrect(48.5,19.4,12.9,4);
 }
 
 
