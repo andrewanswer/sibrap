@@ -190,12 +190,12 @@ module HoleInLid() {
 module HoleInEnd() {
 //	endround(x,y,w);		// for round holes, X & Y give the centre
 //	endrect(x,y,w,d);		// for rectangular holes, X & Y give the top left corner
-//	endrect(38,22,24,10);		// Power connector
-//	endrect(43,19,2.5,4) ;		// 'teeth'
-//	endrect(54.5,19,2.5,4) ;
 	translate([0,0,6]) {
 	endrect(43,31,10,14) ;		// DC socket
 	endrect(11,33,14,12);		// USB connector
+	endrect(38,22,24,10);		// Power connector
+//	endrect(43,19,2.5,4) ;		// 'teeth'
+//	endrect(54.5,19,2.5,4) ;
 	}
 
 	// Vent slots
@@ -206,13 +206,13 @@ module HoleInEnd() {
 
 	endrect(3.5,13.2,12.9,4);
 	endrect(18.5,13.2,12.9,4);
-	endrect(33.5,13.2,12.9,4);
-	endrect(48.5,13.2,12.9,4);
+//	endrect(33.5,13.2,12.9,4);
+//	endrect(48.5,13.2,12.9,4);
 
 	endrect(3.5,19.4,12.9,4);
 	endrect(18.5,19.4,12.9,4);
-	endrect(33.5,19.4,12.9,4);
-	endrect(48.5,19.4,12.9,4);
+//	endrect(33.5,19.4,12.9,4);
+//	endrect(48.5,19.4,12.9,4);
 }
 
 
