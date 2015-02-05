@@ -64,9 +64,13 @@ echo(Arduino4);
 // *******************************  View / render options ********************************
 
 // FreeCad positioning
+//part1(); // коробка
+part2(); // крышка
 // ------box part 1------
-/*a=25;
+module part1() {
+a=25;
 b=9;
+
 color([0.8,0.8,0])
 difference() {
 pbox();
@@ -83,13 +87,12 @@ translate(Arduino3)translate([0,0,WallT+1])specnut();
 //translate(Arduino4)cylinder(r=1.5,h=OutD,$fn=16);
 }
 }
-*/
+}
 // ------end box part 1------
 
 // FreeCad positioning
 // ------box part 2------
-
-
+module part2() {
 // brim width
 dr=3;
 // brim height
@@ -119,7 +122,7 @@ translate([-w/2,0,0])cylinder(r=r,h=h,$fn=40);
 translate([-w/2,-r,0])cube([w,2*r,h]);
 translate([w/2,0,0])cylinder(r=r,h=h,$fn=40);
 }
-
+}
 // ------end box part 2------
 
 // Print Box on on it's own
