@@ -10,43 +10,40 @@
 // The lid slides on, which holds your PCB(s) in.
 // Apertures are added with code in the modules "HoleInLid" and "HoleInEnd". See the comments.
 
+// качество отверстий
+$fn=16;
 // Outside dimensions of the box, and other structural dimensions
+OutL = 120;// Length in mm
+OutW = 65.5;	// Width in mm
+OutD = 52;// Depth in mm
+WallT = 2.1;// Wall thickness (mm)
 
-OutL = 120;		// Length in mm
-OutW = 65.5 ; 	// Width in mm
-OutD = 52;		// Depth in mm
-WallT = 2.1	;	// Wall thickness (mm)
+// расстояние между коробкой и крышкой для печати, а также увеличение диаметра отверстий.
+Allow = 0.2;		// Allowance for fit of the lid. A gap around it, and elsewhere.
 
-// PCB supports are defined by the distance to the underside of the PCB, from the top external of the box.
-// Supports for the PCB are ribs above and below
-PCBgap = 2 ;	// Slot size for PCB to slide into
-PCB1 = 0;//33 ;		// Position of first PCB (0 if none)
-PCB2 = 0;		// Position of second PCB (0 if none)
-PCB3 = 0 ;		// Position of third PCB (0 if none)
-
+//color([1,0,0,1])cube([OutL,OutW,OutD],true);
 // Screw fasteners are positioned by defining their centre , below the top external surface
 // They will be positioned on either side at that height. You have to make sure they are not in a PCB slot!
 Screws1 = WallT;//48 ;	// Position of top screws
 Screws2 = WallT;//6.5;	// Second set of screws
 // Optionally specify the screw hole diameter, to have the holes 'printed'. Otherwise drill them...
-ScrewH = 2.0 ;	// Screw hole diameter, in base
-ScrewL = 3.0 ;	// Screw hole diameter, in lid
+ScrewH = 2.0;	// Screw hole diameter, in base
+ScrewL = 3+Allow;	// Screw hole diameter, in lid
+// Plastic blocks to screw into
+ScrewD = 10;	// Depth of screw block (which the screw goes into)
+ScrewW = 6+Allow;	// Width of Screw block, and of countersink in lid
 
 // More obscure parameters
-BRad = 0;//4;		// Radius of curvature, box edges (mm)
+//BRad = 4;		// Radius of curvature, box edges (mm)
 // For wide boxes (>50/60mm) you may want to use this, or make WallT larger for rigidity.
-Ridge = 0;//0.5;		// Depth of reinforcing ridge at end of base. 0 to suppress, is WallT multiplier. (not mm!) e.g 1.5
+//Ridge = 0;		// Depth of reinforcing ridge at end of base. 0 to suppress, is WallT multiplier. (not mm!) e.g 1.5
 
-Sdepth = 1.0 ;	// Depth of support ribs for Lid and PCB (mm)
+// размеры подпорки под крышку (в мм)
+Sdepth = 1.0;	// Depth of support ribs for Lid and PCB (mm)
 Swidth = 1.5;
-// Bevelled ridge to hold lid on (in mm)
-RHeight = 3 ;	// Top ridge height
-RWidth = 2 ;	// Top ridge width (out over the box)
-// Plastic blocks to screw into
-ScrewD = 10 ;	// Depth of screw block (which the screw goes into)
-ScrewW = 6 ;	// Width of Screw block, and of countersink in lid
-
-Allow = 0.5;		// Allowance for fit of the lid. A gap around it, and elsewhere.
+// размеры треугольного профиля (в мм)
+RHeight = WallT;//3.0;	// Top ridge height
+RWidth = WallT;//2.0;	// Top ridge width (out over the box)
 
 // http://blog.arduino.cc/2011/01/05/nice-drawings-of-the-arduino-uno-and-mega-2560/
 // or sibrap/specs/arduino_mega_drawing.svg
@@ -63,9 +60,10 @@ echo(Arduino3);
 echo(Arduino4);
 // *******************************  View / render options ********************************
 
-// FreeCad positioning
-//part1(); // коробка
+// КОМПИЛИРОВАТЬ ТУТ
+part1(); // коробка
 part2(); // крышка
+
 // ------box part 1------
 module part1() {
 a=25;
@@ -75,16 +73,15 @@ color([0.8,0.8,0])
 difference() {
 pbox();
 translate([-OutL/2+a,b,-OutD/2-1]){
-cylinder(r=1.5,h=OutD,$fn=16);
-translate([82,0,0])cylinder(r=1.5,h=OutD,$fn=16);
+cylinder(r=ScrewL/2,h=OutD);
+translate([82,0,0])cylinder(r=ScrewL/2,h=OutD);
 }
 translate([-OutL/2+6,-OutW/2+10,-OutD/2-1]){
-translate(Arduino1)cylinder(r=1.5,h=OutD,$fn=16);
-translate(Arduino2)cylinder(r=1.5,h=OutD,$fn=16);
-translate(Arduino3)cylinder(r=1.5,h=OutD,$fn=16);
-translate(Arduino3)translate([0,0,0.95])cylinder(r1=3,r2=0,h=3,$fn=16);
+translate(Arduino1)cylinder(r=ScrewL/2,h=OutD);
+translate(Arduino2)cylinder(r=ScrewL/2,h=OutD);
+translate(Arduino3)translate([0,0,1])countersink();
 translate(Arduino3)translate([0,0,WallT+1])specnut();
-//translate(Arduino4)cylinder(r=1.5,h=OutD,$fn=16);
+//translate(Arduino4)cylinder(r=ScrewL/2,h=OutD);
 }
 }
 }
@@ -102,9 +99,9 @@ rotate([0,180,0]) {
 difference() {
 union() {
 pboxlid();
-translate([0,0,-OutD/2+WallT])holes(2.3+dr,3.5+dr,dh);
+translate([0,0,-OutD/2+WallT]) holes(2.3+dr,3.5+dr,dh);
 }
-translate([0,0,-OutD/2-1]) holes(2.3,3.5,OutD);
+translate([0,0,-OutD/2-1]) holes(2.3,3.5,WallT+dh+2);
 }
 }
 
@@ -118,9 +115,9 @@ translate([-40,15,0])rbox(r1,14,h);
 }
 
 module rbox(r,w,h) {
-translate([-w/2,0,0])cylinder(r=r,h=h,$fn=40);
+translate([-w/2,0,0])cylinder(r=r,h=h);
 translate([-w/2,-r,0])cube([w,2*r,h]);
-translate([w/2,0,0])cylinder(r=r,h=h,$fn=40);
+translate([w/2,0,0])cylinder(r=r,h=h);
 }
 }
 // ------end box part 2------
@@ -137,11 +134,10 @@ translate([w/2,0,0])cylinder(r=r,h=h,$fn=40);
 //translate([0,-OutW/2-5,OutD/2]) pboxlid() ;
 //translate([0,OutD/2+5,OutL/2-WallT]) rotate([0,-90,90]) pbox() ;
 
-
 module specnut() {
 difference() {
-cylinder(10,r=6.6/2,$fn=6);
-translate([0,0,-0.1])cylinder(10.2,r=3/2,$fn=16);
+cylinder(10,r=(6.6+Allow)/2,$fn=6);
+translate([0,0,-0.1])cylinder(10.2,r=ScrewL/2);
 }
 }
 
@@ -153,46 +149,46 @@ translate([0,0,-0.1])cylinder(10.2,r=3/2,$fn=16);
 // Do a test, you'll see how it goes.
 // X is across, Y is down, W is x width, D is y depth.
 
-// Called by pboxlid to make any required holes in the lid face
+// вентилятор в крышке
 module HoleInLid() {
 //	lidround(x,y,w);		// for round holes, X & Y give the centre
 //	lidrect(x,y,w,d);		// for rectangular holes, X & Y give the top left corner
 	// Fan Mount holes
-	lidround(OutW-10,OutL-8,3.8) ;
-	lidround(OutW-42.5,OutL-8,3.8) ;
-	lidround(OutW-10,OutL-40.5,3.8) ;
-	lidround(OutW-42.5,OutL-40.5,3.8) ;
+	lidround(OutW-10,OutL-8,4+Allow);
+	lidround(OutW-42.5,OutL-8,4+Allow);
+	lidround(OutW-10,OutL-40.5,4+Allow);
+	lidround(OutW-42.5,OutL-40.5,4+Allow);
 
 	// Air vent slots
-	lidrect(OutW-34.5,OutL-8.5,16,2) ;
-	lidrect(OutW-39,OutL-11.5,25,2) ;
-	lidrect(OutW-41.5,OutL-14.5,30,2) ;
+	lidrect(OutW-34.5,OutL-8.5,16,2);
+	lidrect(OutW-39,OutL-11.5,25,2);
+	lidrect(OutW-41.5,OutL-14.5,30,2);
 
-	lidrect(OutW-43,OutL-17.5,11,2) ;
-	lidrect(OutW-21,OutL-17.5,11,2) ;
+	lidrect(OutW-43,OutL-17.5,11,2);
+	lidrect(OutW-21,OutL-17.5,11,2);
 
-	lidrect(OutW-44.5,OutL-20.5,10,2) ;
-	lidrect(OutW-18.5,OutL-20.5,10,2) ;
+	lidrect(OutW-44.5,OutL-20.5,10,2);
+	lidrect(OutW-18.5,OutL-20.5,10,2);
 
-	lidrect(OutW-45.5,OutL-23.5,10,2) ;
-	lidrect(OutW-17.5,OutL-23.5,10,2) ;
+	lidrect(OutW-45.5,OutL-23.5,10,2);
+	lidrect(OutW-17.5,OutL-23.5,10,2);
 
-	lidrect(OutW-45.5,OutL-26.5,10,2) ;
-	lidrect(OutW-17.5,OutL-26.5,10,2) ;
+	lidrect(OutW-45.5,OutL-26.5,10,2);
+	lidrect(OutW-17.5,OutL-26.5,10,2);
 
-	lidrect(OutW-44.5,OutL-29.5,10,2) ;
-	lidrect(OutW-18.5,OutL-29.5,10,2) ;
+	lidrect(OutW-44.5,OutL-29.5,10,2);
+	lidrect(OutW-18.5,OutL-29.5,10,2);
 
-	lidrect(OutW-21,OutL-32.5,11,2) ;
-	lidrect(OutW-43,OutL-32.5,11,2) ;
+	lidrect(OutW-21,OutL-32.5,11,2);
+	lidrect(OutW-43,OutL-32.5,11,2);
 
-	lidrect(OutW-41.5,OutL-35.5,30,2) ;
-	lidrect(OutW-39,OutL-38.5,25,2) ;
-	lidrect(OutW-34.5,OutL-41.5,16,2) ;
+	lidrect(OutW-41.5,OutL-35.5,30,2);
+	lidrect(OutW-39,OutL-38.5,25,2);
+	lidrect(OutW-34.5,OutL-41.5,16,2);
 }
 
 
-// Called by pbox to make any required holes in the end of the box
+// разъемы в коробке
 module HoleInEnd() {
 //	endround(x,y,w);		// for round holes, X & Y give the centre
 //	endrect(x,y,w,d);		// for rectangular holes, X & Y give the top left corner
@@ -224,144 +220,91 @@ module HoleInEnd() {
 
 // **************** Main Box and Lid modules  *************************
 
-// The Project Box
+// коробка
 module pbox() {
-	blen = OutL-WallT*2 ;		// Len of box w/o endplate
-	rheight = WallT * Ridge ;	// Ridge height, if any
-	slen = OutW-WallT*2+0.2  ;	// Lib support at end length
+	//blen = OutL-WallT*2 ;		// Len of box w/o endplate
+	//rheight = WallT * Ridge ;	// Ridge height, if any
+	//slen = OutW-WallT*2+0.2  ;	// Lib support at end length
 	union () {
 		difference() {
-			rotate ([0,90,0]) roundedBox(OutD,OutW,blen,BRad,$fn=40) ;
-			translate([WallT*2,0,WallT*2]) rotate ([0,90,0]) roundedBox(OutD+(WallT*2),OutW-(WallT*2),OutL,BRad) ;
-			HoleInEnd() ;
+			translate([0,0,-WallT/2])cube([OutL,OutW,OutD-WallT],true);
+			translate([WallT,0,WallT]) cube([OutL,OutW-(WallT*2),OutD],true);
+			HoleInEnd();
 		}
-		topridge() ;		// Add a ridge around the top to hold the lid on
+		// Add a ridge around the top to hold the lid on
+		topridge(OutL/2-RHeight/2);
 		// Add support to hold the lid up at the sides
-		//support(OutD/2-RHeight-0.5);
-		rotate([0,90,0])support(OutL/2-WallT-RHeight-0.5);
-		// Support the end of the lid
-//		translate([-(OutL/2-WallT*2+0.1),OutW/2-WallT-0.1,OutD/2-RHeight-0.6-Sdepth]) rotate([0,0,-90]) cube([slen,Swidth,Sdepth]) ;
-		translate([OutL/2-WallT-RHeight-0.5-1.5,OutW/2-WallT-0.1,-(OutD/2+WallT-RHeight-0.6-Sdepth)]) rotate([0,0,-90]) cube([slen,Swidth,Sdepth]) ;
+		topridge(OutL/2-3*RHeight/2-Allow);
+		//supportcap(OutL/2-RHeight-Sdepth/2);
 		// Optional reinforcing ridge
-		if (Ridge != 0) {
+		/*if (Ridge != 0) {
 			translate([OutL/2-WallT,-OutW/2+BRad,-OutD/2+WallT+rheight-0.1]) rotate([0,180,0]) halfslab(rheight*2,OutW-BRad*2,rheight) ;
-		}
-		if (PCB1 != 0) {
-			support(OutD/2 - PCB1) ;	// Support under the PCB
-			support(OutD/2 - (PCB1 - Sdepth - PCBgap)) ;	// Support over the PCB
-		}
-		if (PCB2 != 0) {
-			support(OutD/2 - PCB2) ;	// Support under the PCB
-			support(OutD/2 - (PCB2 - Sdepth - PCBgap)) ;	// Support over the PCB
-		}
-		if (PCB3 != 0) {
-			support(OutD/2 - PCB3) ;	// Support under the PCB
-			support(OutD/2 - (PCB3 - Sdepth - PCBgap)) ;	// Support over the PCB
-		}
-		if (Screws1 != 0) {
-//			translate([OutL/2-WallT,OutW/2-ScrewW/2-Allow,OutD/2-Screws1])
-			translate([-OutL/2+WallT+ScrewW/2,OutW/2-ScrewW/2-Allow,OutD/2-Screws1])
-//rotate([0,-90,0])
+		}*/
+translate([-OutL/2+WallT+ScrewW/2,OutW/2-WallT/2-ScrewW/2,OutD/2-Screws1])
 rotate([0,180,0])
-sblock(ScrewW,ScrewH,ScrewD) ;
-//			translate([OutL/2-WallT,-(OutW/2-ScrewW/2)+Allow,OutD/2-Screws1])
-			translate([-OutL/2+WallT+ScrewW/2,-(OutW/2-ScrewW/2)+Allow,OutD/2-Screws1])
-//rotate([0,90,180])
+sblock(ScrewW,ScrewH,ScrewD);
+translate([-OutL/2+WallT+ScrewW/2,-(OutW/2-WallT/2-ScrewW/2),OutD/2-Screws1])
 rotate([0,180,180])
-sblock(ScrewW,ScrewH,ScrewD) ;
-		}
-		if (Screws2 != 0) {
-//			translate([OutL/2-WallT,OutW/2-ScrewW/2-Allow,OutD/2-Screws2])
-			translate([OutL/2-3*WallT-ScrewW/2,OutW/2-ScrewW/2-Allow,OutD/2-Screws2])
-//rotate([0,-90,0])
+sblock(ScrewW,ScrewH,ScrewD);
+
+translate([OutL/2-WallT-ScrewW/2,OutW/2-WallT/2-ScrewW/2,OutD/2-Screws2])
 rotate([0,180,0])
-sblock(ScrewW,ScrewH,ScrewD) ;
-//			translate([OutL/2-WallT,-(OutW/2-ScrewW/2)+Allow,OutD/2-Screws2])
-			translate([OutL/2-3*WallT-ScrewW/2,-(OutW/2-ScrewW/2)+Allow,OutD/2-Screws2])
-//rotate([0,90,180])
+sblock(ScrewW,ScrewH,ScrewD);
+translate([OutL/2-WallT-ScrewW/2,-(OutW/2-WallT/2-ScrewW/2),OutD/2-Screws2])
 rotate([0,180,180])
-sblock(ScrewW,ScrewH,ScrewD) ;
-		}
+sblock(ScrewW,ScrewH,ScrewD);
 	}
 }
 
-// Sliding lid for Box
+// крышка
 module pboxlid() {
-	wid = OutW-(WallT*2)-Allow ;
-	dadj = Allow ;			// Depth adjustment of end plate, seems to help...
-	union() {
-		difference() {
-			translate([0,0,0]) rotate ([0,90,0]) roundedBox(OutD-dadj,OutW,OutL,BRad) ;
-			translate([-(OutL/2-WallT*2),-(OutW+5)/2,-(OutD/2+2.5)]) cube([OutL+5,OutW+5,OutD+5]) ;
-translate ([-60,-24,5])
-rotate ([90,0,90,])
-HoleInLid ();
+	// верх
+	difference() {
+		translate([-OutL/2,-OutW/2,-OutD/2]) cube([OutL,OutW,WallT]);
 
-		}
-		difference() {
-		render() {
-			translate([-(OutL/2-0.1),0,-OutD/2+RHeight]) rotate([180,0,0]) platform(RHeight,wid,wid-(RWidth*2),OutL-WallT-Allow) ;
-		}
-
-			// Hollow out end plate
-			//translate([-(OutL/2-WallT),-(OutW/2)+ScrewW+Allow+WallT,-(OutD/2)+0.1]) cube([10,OutW-(ScrewW+WallT+Allow)*2,OutD-WallT*3]) ;
-			translate([-(OutL/2-WallT),-(OutW/2)+ScrewW+Allow,-(OutD/2)+0.1]) cube([10,OutW-(ScrewW+Allow)*2,OutD-WallT*3]) ;
-			// Support wedge
-			//translate([WallT*2-OutL/2+0.1,-(OutW/2)+ScrewW+Allow+WallT-0.1,OutD/2-WallT])
-			//		rotate([0,180,0]) halfslab(WallT,OutW-(ScrewW+WallT+Allow-0.1)*2,WallT*2) ; 
-			translate([WallT*2-OutL/2+0.1,-(OutW/2)+ScrewW+Allow-0.1,OutD/2-WallT])
-					rotate([0,180,0]) halfslab(WallT,OutW-(ScrewW+Allow-0.1)*2,WallT*2) ; 
 			// Screw countersinks as req
-			if (Screws1 != 0) {
-				translate([0.3+OutL/2-3*WallT,OutW/2-ScrewW/2-Allow,-OutD/2+Screws1])
- //rotate([0,90,0])
- countersink() ;
-				translate([0.3+OutL/2-3*WallT,-(OutW/2-ScrewW/2)+Allow,-OutD/2+Screws1])
- //rotate([0,90,0])
- countersink() ;
-			}
-			if (Screws1 != 0 && ScrewL != 0) {
-				translate([-(OutL/2 + 2),OutW/2-ScrewW/2-Allow,-OutD/2+Screws1])
-					//rotate([0,90,0])
- cylinder(WallT*4,ScrewL/2,ScrewL/2,$fn=8) ;
-				translate([-(OutL/2 + 2),-(OutW/2-ScrewW/2)+Allow,-OutD/2+Screws1])
-					//rotate([0,90,0])
- cylinder(WallT*4,ScrewL/2,ScrewL/2,$fn=8) ;
-			}
-			if (Screws2 != 0) {
-				translate([0.3-OutL/2,OutW/2-ScrewW/2-Allow,-OutD/2+Screws2]) 
-//rotate([0,90,0])
-countersink() ;
-				translate([0.3-OutL/2,-(OutW/2-ScrewW/2)+Allow,-OutD/2+Screws2]) 
-//rotate([0,90,0])
-countersink() ;
-			}
-			if (Screws2 != 0 && ScrewL != 0) {
-				translate([-(OutL/2 + 2),OutW/2-ScrewW/2-Allow,-OutD/2+Screws2])
-					//rotate([0,90,0])
- cylinder(WallT*4,ScrewL/2,ScrewL/2,$fn=8) ;
-				translate([-(OutL/2 + 2),-(OutW/2-ScrewW/2)+Allow,-OutD/2+Screws2]) 
-					//rotate([0,90,0])
- cylinder(WallT*4,ScrewL/2,ScrewL/2,$fn=8) ;
-			}
+translate([0,0,-WallT]) mirror([0,0,1]){
+translate([-OutL/2+WallT+ScrewW/2,OutW/2-WallT/2-ScrewW/2,OutD/2-Screws1])
+rotate([0,180,0])
+countersink();
+translate([-OutL/2+WallT+ScrewW/2,-(OutW/2-WallT/2-ScrewW/2),OutD/2-Screws1])
+rotate([0,180,180])
+countersink();
+translate([OutL/2-WallT-ScrewW/2,OutW/2-WallT/2-ScrewW/2,OutD/2-Screws2])
+rotate([0,180,0])
+countersink();
+translate([OutL/2-WallT-ScrewW/2,-(OutW/2-WallT/2-ScrewW/2),OutD/2-Screws2])
+rotate([0,180,180])
+countersink();
 }
+}
+// бок с вентилятором
+	difference() {
+		union() {
+			translate([-OutL/2+WallT/2,0,-RWidth/2-Allow/2]) cube([WallT,OutW-2*(WallT+RWidth+Allow),OutD-2*WallT-RWidth-Allow],true);	
+			topridge2(-OutL/2-RHeight/2);
+		}
+		translate ([-60,-24,6])
+		rotate ([90,0,90])
+		HoleInLid();
 	}
 }
 
 // ****************** Worker modules  ************************
-
+// отверстия под шурупы в крышке
 module countersink() {
 	difference() {
 		union() {
-			cylinder(WallT,ScrewW/2,1) ;
-			translate([0,0,-(WallT-0.1)]) cylinder(WallT,ScrewW/2,ScrewW/2) ;
+			cylinder(WallT,ScrewW/2,1);
+			translate([0,0,-(WallT-0.1)]) cylinder(WallT,ScrewW/2,ScrewW/2);
+			cylinder(WallT*2,ScrewL/2,ScrewL/2);
 		}
 	}
 }
 
 // Platform bevelled on three sides
 // Parameters are height, width at base, width at top and length
-module platform(h,wb,wt,l) {
+/*module platform(h,wb,wt,l) {
 	difference() {
 		polyhedron (points=[[0,-(wb/2),0],[l,-(wb/2),0],[l,(wb/2),0],[0,(wb/2),0], [0,-(wt/2),h],[l,-(wt/2),h],[l,(wt/2),h],[0,(wt/2),h] ], 
 			triangles=[[0,1,5],[0,5,4],[1,2,6],[1,6,5],[2,3,7],[2,7,6],[0,4,7],[0,7,3],[4,5,6],[4,6,7],[3,2,1],[3,1,0],]) ;
@@ -369,9 +312,9 @@ module platform(h,wb,wt,l) {
 		translate([l-RWidth,-(OutW/2+4),RHeight]) rotate([0,90,0]) halfslab(RHeight,OutW+8,RWidth) ;
 //		HoleInLid() ;			// Call user code for aperature
 	}
-}
+}*/
 
-// Block for Screws
+// опора для шурупов
 module sblock(outs,ins,len) { 
 	cone = 20 ;
 	outr = outs/2 - 0.5;
@@ -397,7 +340,7 @@ module sblock(outs,ins,len) {
 
 
 // size is a vector [w, h, d]
-module roundedBox(width, height, depth, radius) {
+/*module roundedBox(width, height, depth, radius) {
 	size=[width, height, depth];
 	cube(size - [2*radius,0,0], true);
 	cube(size - [0,2*radius,0], true);
@@ -405,62 +348,79 @@ module roundedBox(width, height, depth, radius) {
 		y = [radius-size[1]/2, -radius+size[1]/2]) {
 		translate([x,y,0]) cylinder(r=radius, h=size[2], center=true);
 	}
+}*/
+
+// треугольные выступы на крышке
+module topridge2(top) {
+translate([top,0,0]) {
+translate([RHeight,-(OutW/2-RWidth/2-Allow-WallT),-WallT/2-Allow/2])
+rotate([-90,0,-90])
+halfslab(RWidth, OutD-(WallT*3)-Allow, RHeight);
+
+translate([RHeight,OutW/2-RWidth/2-Allow-WallT,-WallT/2-Allow/2])
+rotate([90,0,90])
+halfslab(RWidth, OutD-(WallT*3)-Allow, RHeight);
+
+translate([RHeight,0,OutD/2-RWidth/2-Allow-WallT])
+rotate([0,-90,180])
+halfslab(RWidth, OutW-WallT*4-Allow*2, RHeight);
+}
 }
 
-//  Kind of triangle cross section beam w->X; d->Y; h->Z
+// треугольные выступы на коробке для фиксации крышки
+module topridge(top) {
+translate([top,0,0]){
+
+translate([0,-OutW/2+WallT+RWidth/2,0])
+rotate([90,0,90])
+halfslab(RWidth, OutD-(WallT*2), RHeight);
+
+translate([0,OutW/2-WallT-RWidth/2,0])
+rotate([90,180,90])
+halfslab(RWidth, OutD-(WallT*2), RHeight);
+
+translate([0,0,-OutD/2+WallT+RWidth/2])
+rotate([0,180,0])
+halfslab(RHeight, OutW-(WallT*2), RWidth);
+}
+}
+
+// треугольный профиль w * h, d - длина
 module halfslab(w,d,h) {
+	translate([-w/2,-d/2,-h/2])
 	polyhedron ( points = [[0, 0, h], [0, d, h], [0, d, 0], [0, 0, 0], [w, 0, h], [w, d, h]], 
-		triangles = [[0,3,2], [0,2,1], [3,0,4], [1,2,5], [0,5,4], [0,1,5],  [5,2,4], [4,2,3], ]);
+		faces = [[0,3,2], [0,2,1], [3,0,4], [1,2,5], [0,5,4], [0,1,5],  [5,2,4], [4,2,3]]);
 }
 
-// Top ridge which retains the lid
-module topridge() {
-	blen = 0 ;
-rotate([90,-90,90]) {
-//	translate([(OutL-WallT*2)/2-0.1, -(OutW/2-WallT+0.1),(OutD/2)-(RHeight+0.1)])
-	translate([(OutD-WallT*4)/2-0.1, -(OutW/2-WallT+0.1),(OutL/2)-(RHeight+WallT+0.1)])
- rotate([0,0,90])
-// halfslab(RWidth+0.2, OutL-(WallT*3), RHeight ) ;
- halfslab(RWidth+0.2, OutD-(WallT*3), RHeight ) ;
-//	translate([-(OutL-WallT*4)/2+0.1, (OutW/2-WallT+0.1),(OutD/2)-(RHeight+0.1)])
-	translate([-(OutD-WallT*2)/2+0.1, (OutW/2-WallT+0.1),(OutL/2)-(RHeight+WallT+0.1)])
- rotate([0,0,-90])
-// halfslab(RWidth+0.2, OutL-(WallT*3), RHeight ) ;
- halfslab(RWidth+0.2, OutD-(WallT*3), RHeight ) ;
-//	translate([-(OutL/2-WallT*2+0.1),- (OutW/2-WallT+0.1),(OutD/2)-(RHeight+0.1)])
-	translate([-(OutD/2-WallT+0.1),- (OutW/2-WallT+0.1),(OutL/2)-(RHeight+WallT+0.1)])
- rotate([0,0,0])
-// halfslab(RWidth+0.2, OutW-(WallT*2), RHeight ) ;
- halfslab(RWidth+0.2, OutW-(WallT*2), RHeight ) ;
+// подпорка под крышку
+module supportcap(top) {
+translate([top,0,0])rotate([0,90,0]) {
+	translate([0,-(OutW/2-WallT-Swidth/2),0]) rib(OutD - WallT*2);
+	translate([0,(OutW/2-WallT-Swidth/2),0]) rib(OutD - WallT*2);
+	translate([OutD/2-WallT-Swidth/2,0,0]) rotate([0,0,-90]) rib(OutW - WallT*2);
 }
 }
 
-// Support ridge for lid or PCB
-module support(top) {
-	translate([0,-(OutW/2-(WallT-0.1)),top]) rib() ;
-	translate([0,(OutW/2-(WallT-0.1)-Swidth),top]) rib() ;
+// подпорка под крышку - 1 линия
+module rib(len) {
+	cube([len,Swidth,Sdepth],true);
 }
 
-//Rib of support
-module rib() {
-	//len = OutL - (WallT*3) - Allow ;
-	len = OutD - (WallT*3) - Allow ;
-// Allow for 1 wall thickness at one end, 2 at the other, and an Allowance
-	translate([-len/2 +0.1,0,-Sdepth]) cube([len,Swidth,Sdepth]) ;
-}
-
-module endround(x,y,w) {
+/*module endround(x,y,w) {
 	translate([-(10+OutL-WallT*4)/2,OutW/2-x,OutD/2-y]) rotate([0,90,0]) cylinder(10,w/2,w/2) ;
-}
+}*/
 
+// решетка над разъемами
 module endrect(x,y,w,d) {
-	translate([-(10+OutL-WallT*4)/2,OutW/2-w-x,OutD/2-y]) rotate([0,90,0]) cube([d,w,10]) ;
+	translate([-OutL/2-1,OutW/2-w-x,OutD/2-y]) rotate([0,90,0]) cube([d,w,WallT+2]) ;
 }
 
+// отверстия под болты вентилятора
 module lidround(x,y,w) {
-	translate([OutL-y,OutW/2-x,-10]) cylinder(20,w/2,w/2) ;
+	translate([OutL-y,OutW/2-x,-1]) cylinder(WallT+2,w/2,w/2);
 }
 
+// решетка вентилятора
 module lidrect(x,y,w,d) {
-	translate([OutL-d-y,OutW/2-w-x,-8]) cube([d,w,20]) ;
+	translate([OutL-d-y,OutW/2-w-x,-1]) cube([d,w,WallT+2]);
 }
