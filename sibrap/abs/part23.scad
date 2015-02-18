@@ -1,13 +1,13 @@
-m8_diameter = 9;
-m8_nut_diameter = 14.1;
+m8_diameter = 8.2;
+//m8_nut_diameter = 14.1;
 
 m3_diameter = 3.2;
 m3_nut_diameter = 5.3;
 m3_nut_diameter_horizontal = 6.1;
 
 outer_diameter = m8_diameter/2+3.3;
-screw_hole_spacing = 20;
-opening_size = m8_diameter-1.5; //openingsize
+//screw_hole_spacing = 20;
+opening_size = m8_diameter-1.5;
 
 module endstop(){
 difference(){
