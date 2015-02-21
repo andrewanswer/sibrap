@@ -27,7 +27,7 @@ Allow = 0.2;		// Allowance for fit of the lid. A gap around it, and elsewhere.
 Screws1 = WallT;//48 ;	// Position of top screws
 Screws2 = WallT;//6.5;	// Second set of screws
 // Optionally specify the screw hole diameter, to have the holes 'printed'. Otherwise drill them...
-ScrewH = 2.0;	// Screw hole diameter, in base
+ScrewH = 3.0;	// Screw hole diameter, in base
 ScrewL = 3+Allow;	// Screw hole diameter, in lid
 // Plastic blocks to screw into
 ScrewD = 10;	// Depth of screw block (which the screw goes into)
@@ -62,7 +62,7 @@ echo(Arduino4);
 
 // КОМПИЛИРОВАТЬ ТУТ
 part1(); // коробка
-//part2(); // крышка
+part2(); // крышка
 
 // ------box part 1------
 module part1() {
@@ -241,18 +241,25 @@ module pbox() {
 			translate([OutL/2-WallT,-OutW/2+BRad,-OutD/2+WallT+rheight-0.1]) rotate([0,180,0]) halfslab(rheight*2,OutW-BRad*2,rheight) ;
 		}*/
 translate([-OutL/2+WallT+ScrewW/2,OutW/2-WallT/2-ScrewW/2,OutD/2-Screws1])
-rotate([0,180,0])
+rotate([0,180,0]) {
 sblock(ScrewW,ScrewH,ScrewD);
+translate([3.35,0,ScrewD/2])rotate([90,0,-90])cube([5,ScrewD,3.7],true);
+}
 translate([-OutL/2+WallT+ScrewW/2,-(OutW/2-WallT/2-ScrewW/2),OutD/2-Screws1])
-rotate([0,180,0])mirror([0,1,0])
+rotate([0,180,0])mirror([0,1,0]) {
 sblock(ScrewW,ScrewH,ScrewD);
-
-translate([OutL/2-WallT-ScrewW/2,OutW/2-WallT/2-ScrewW/2,OutD/2-Screws2])
-rotate([0,180,0])
+translate([3.35,0,ScrewD/2])rotate([90,0,-90])cube([5,ScrewD,3.7],true);
+}
+translate([OutL/2-WallT-ScrewW/2-0.2,OutW/2-WallT/2-ScrewW/2,OutD/2-Screws2])
+rotate([0,180,0]) {
 sblock(ScrewW,ScrewH,ScrewD);
-translate([OutL/2-WallT-ScrewW/2,-(OutW/2-WallT/2-ScrewW/2),OutD/2-Screws2])
-rotate([0,180,0])mirror([0,1,0])
+translate([4.3,0,ScrewD/2])rotate([90,0,-90])halfslab(5,ScrewD,5);
+}
+translate([OutL/2-WallT-ScrewW/2-0.2,-(OutW/2-WallT/2-ScrewW/2),OutD/2-Screws2])
+rotate([0,180,0])mirror([0,1,0]) {
 sblock(ScrewW,ScrewH,ScrewD);
+translate([4.3,0,ScrewD/2])rotate([90,0,-90])halfslab(5,ScrewD,5);
+}
 	}
 }
 
@@ -264,16 +271,16 @@ module pboxlid() {
 
 			// Screw countersinks as req
 translate([0,0,-WallT]) mirror([0,0,1]){
-translate([-OutL/2+WallT+ScrewW/2,OutW/2-WallT/2-ScrewW/2,OutD/2-Screws1])
-rotate([0,180,0])
-countersink();
-translate([-OutL/2+WallT+ScrewW/2,-(OutW/2-WallT/2-ScrewW/2),OutD/2-Screws1])
-rotate([0,180,180])
-countersink();
 translate([OutL/2-WallT-ScrewW/2,OutW/2-WallT/2-ScrewW/2,OutD/2-Screws2])
 rotate([0,180,0])
 countersink();
 translate([OutL/2-WallT-ScrewW/2,-(OutW/2-WallT/2-ScrewW/2),OutD/2-Screws2])
+rotate([0,180,180])
+countersink();
+translate([-OutL/2+WallT+ScrewW/2+0.2,OutW/2-WallT/2-ScrewW/2,OutD/2-Screws1])
+rotate([0,180,0])
+countersink();
+translate([-OutL/2+WallT+ScrewW/2+0.2,-(OutW/2-WallT/2-ScrewW/2),OutD/2-Screws1])
 rotate([0,180,180])
 countersink();
 }
@@ -327,14 +334,14 @@ module sblock(outs,ins,len) {
 		union() {
 			cylinder(len,outs/2,outs/2);
 			//translate([0,0,len-((sin(cone)*outs/2))]) rotate([-cone,0,0],[0,0,len]) cylinder((outs/2)/tan(cone),outs/2,0);
-			translate([3.6,0,len/2])rotate([90,0,-90])halfslab(4.4,len,3);
+			//translate([3.6,0,len/2])rotate([90,0,-90])halfslab(4.4,len,3);
 		}
 		if (ins !=0) {
-			// translate([0,0,-2]) cylinder(len+2,ins/2,ins/2);
-			translate([0,0,-0.1]) linear_extrude(10,true,10,0) 
-				polygon(points=[[0,outr],[outL,outS],[outL,-outS],[0,-outr],[-outL,-outS],[-outL,outS],[-inS,inL],
-					[inS,inL],[inr,0],[inS,-inL],[-inS,-inL],[-inr,0]], 
-					paths=[[0,7,1,8,2,9,3,10,4,11,5,6]],convexity=6);
+			 translate([0,0,-1]) cylinder(len+2,ins/2,ins/2);
+			//translate([0,0,-0.1]) linear_extrude(10,true,10,0) 
+				//polygon(points=[[0,outr],[outL,outS],[outL,-outS],[0,-outr],[-outL,-outS],[-outL,outS],[-inS,inL],
+					//[inS,inL],[inr,0],[inS,-inL],[-inS,-inL],[-inr,0]], 
+					//paths=[[0,7,1,8,2,9,3,10,4,11,5,6]],convexity=6);
 		}
 	}
 }
