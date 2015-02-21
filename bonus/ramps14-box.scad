@@ -62,7 +62,7 @@ echo(Arduino4);
 
 // КОМПИЛИРОВАТЬ ТУТ
 part1(); // коробка
-part2(); // крышка
+//part2(); // крышка
 
 // ------box part 1------
 module part1() {
@@ -244,14 +244,14 @@ translate([-OutL/2+WallT+ScrewW/2,OutW/2-WallT/2-ScrewW/2,OutD/2-Screws1])
 rotate([0,180,0])
 sblock(ScrewW,ScrewH,ScrewD);
 translate([-OutL/2+WallT+ScrewW/2,-(OutW/2-WallT/2-ScrewW/2),OutD/2-Screws1])
-rotate([0,180,180])
+rotate([0,180,0])mirror([0,1,0])
 sblock(ScrewW,ScrewH,ScrewD);
 
 translate([OutL/2-WallT-ScrewW/2,OutW/2-WallT/2-ScrewW/2,OutD/2-Screws2])
 rotate([0,180,0])
 sblock(ScrewW,ScrewH,ScrewD);
 translate([OutL/2-WallT-ScrewW/2,-(OutW/2-WallT/2-ScrewW/2),OutD/2-Screws2])
-rotate([0,180,180])
+rotate([0,180,0])mirror([0,1,0])
 sblock(ScrewW,ScrewH,ScrewD);
 	}
 }
@@ -316,24 +316,25 @@ module countersink() {
 
 // опора для шурупов
 module sblock(outs,ins,len) { 
-	cone = 20 ;
+	cone = 20;
 	outr = outs/2 - 0.5;
-	inr = ins/2 ;
+	inr = ins/2;
 	outL = outr * 0.87;
-	outS = outr/2 ;
-	inL = inr * 0.87 ;
-	inS = inr /2 ;
+	outS = outr/2;
+	inL = inr * 0.87;
+	inS = inr /2;
 	difference() {
 		union() {
-			cylinder(len,outs/2,outs/2) ;
-			translate([0,0,len-((sin(cone)*outs/2))]) rotate([-cone,0,0],[0,0,len]) cylinder((outs/2)/tan(cone),outs/2,0) ;
+			cylinder(len,outs/2,outs/2);
+			//translate([0,0,len-((sin(cone)*outs/2))]) rotate([-cone,0,0],[0,0,len]) cylinder((outs/2)/tan(cone),outs/2,0);
+			translate([3.6,0,len/2])rotate([90,0,-90])halfslab(4.4,len,3);
 		}
 		if (ins !=0) {
-			// translate([0,0,-2]) cylinder(len+2,ins/2,ins/2) ;
+			// translate([0,0,-2]) cylinder(len+2,ins/2,ins/2);
 			translate([0,0,-0.1]) linear_extrude(10,true,10,0) 
 				polygon(points=[[0,outr],[outL,outS],[outL,-outS],[0,-outr],[-outL,-outS],[-outL,outS],[-inS,inL],
 					[inS,inL],[inr,0],[inS,-inL],[-inS,-inL],[-inr,0]], 
-					paths=[[0,7,1,8,2,9,3,10,4,11,5,6]],convexity=6) ;
+					paths=[[0,7,1,8,2,9,3,10,4,11,5,6]],convexity=6);
 		}
 	}
 }
