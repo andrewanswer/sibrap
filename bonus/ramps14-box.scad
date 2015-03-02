@@ -27,7 +27,7 @@ Allow = 0.2;		// Allowance for fit of the lid. A gap around it, and elsewhere.
 Screws1 = WallT;//48 ;	// Position of top screws
 Screws2 = WallT;//6.5;	// Second set of screws
 // Optionally specify the screw hole diameter, to have the holes 'printed'. Otherwise drill them...
-ScrewH = 3.0;	// Screw hole diameter, in base
+ScrewH = 2.2;	// Screw hole diameter, in base
 ScrewL = 3+Allow;	// Screw hole diameter, in lid
 // Plastic blocks to screw into
 ScrewD = 10;	// Depth of screw block (which the screw goes into)
