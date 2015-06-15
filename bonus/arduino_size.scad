@@ -52,6 +52,7 @@ difference () {
 */
 }}
 
+module arduino_ramps() {
 union(){
 	// Arduino - стандартный размер и расположение отверстий
 	translate ([0,0,0]) Arduino (ArdX,ArdY,ArdH,a,b);
@@ -73,3 +74,6 @@ union(){
 	translate (Arduino2+[a,b,-10])specnut();
 	translate (Arduino3+[a,b,-10])specnut();
 }
+}
+
+arduino_ramps();

@@ -1,3 +1,4 @@
+use <arduino_size.scad>
 // Sliding Project box V1.2, now with screw holes!
 // John Newman, 25th November 2011
 //
@@ -61,7 +62,8 @@ echo(Arduino4);
 // *******************************  View / render options ********************************
 
 // КОМПИЛИРОВАТЬ ТУТ
-part1(); // коробка
+//translate([-OutL/2+6,-OutW/2+10,-OutD/2+12])arduino_ramps();
+//part1(); // коробка
 part2(); // крышка
 
 // ------box part 1------
@@ -69,7 +71,7 @@ module part1() {
 a=25;
 b=9;
 
-color([0.8,0.8,0])
+//color([0.8,0.8,0])
 difference() {
 pbox();
 translate([-OutL/2+a,b,-OutD/2-1]){
@@ -425,10 +427,10 @@ module endrect(x,y,w,d) {
 
 // отверстия под болты вентилятора
 module lidround(x,y,w) {
-	translate([OutL-y,OutW/2-x,-1]) cylinder(WallT+2,w/2,w/2);
+	translate([OutL-y,OutW/2-x,-3]) cylinder(WallT+5,w/2,w/2);
 }
 
 // решетка вентилятора
 module lidrect(x,y,w,d) {
-	translate([OutL-d-y,OutW/2-w-x,-1]) cube([d,w,WallT+2]);
+	translate([OutL-d-y,OutW/2-w-x,-3]) cube([d,w,WallT+5]);
 }
