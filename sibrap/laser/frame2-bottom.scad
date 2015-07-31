@@ -40,7 +40,7 @@ dx4 = 290+dh;
 // диаметр отверстия под винт М5
 d4 = 5;
 
-module cut(d1,d4) {
+module frame2_cut(d1,d4) {
     // крепление двигателя NEMA17
     translate([x2,(y1-dx)/2,0]) {
         cylinder(r=d1/2,h=dh,$fn=fn2);
@@ -60,19 +60,19 @@ module cut(d1,d4) {
 }
 
 
-module main(d1,d4) {
+module frame2_main(d1,d4) {
     difference() {
         cube([x1,y1,dh]);
-        cut(d1,d4);
-        translate([x1,0,0]) mirror([1,0,0]) cut(d1,d4);
+        frame2_cut(d1,d4);
+        translate([x1,0,0]) mirror([1,0,0]) frame2_cut(d1,d4);
     }
 }
 
-module laser() {
+module frame2_laser() {
     d1_ = d1 < D_MIN ? 1 : d1;
     d4_ = d4 < D_MIN ? 1 : d4;
-    main(d1_,d4_);
+    frame2_main(d1_,d4_);
 }
 
 //projection() main(d1,d4);
-projection() laser();
+projection() frame2_laser();

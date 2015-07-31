@@ -27,7 +27,7 @@ y2 = 20;
 // расстояние между осями вырезов по горизонтали
 dx2 = 290+dh;
 
-module cut(d1) {
+module frame3_cut(d1) {
     // крепление направляющей Z
     translate([dx1,y1/2,0])cylinder(r=d1/2,h=dh,$fn=fn2);
     translate([dx1+dx11,y1/2,0])cylinder(r=d1/2,h=dh,$fn=fn2);
@@ -36,18 +36,18 @@ module cut(d1) {
 }
 
 
-module main(d1) {
+module frame3_main(d1) {
     difference() {
         cube([x1,y1,dh]);
-        cut(d1);
-        translate([x1,0,0]) mirror([1,0,0]) cut(d1);
+        frame3_cut(d1);
+        translate([x1,0,0]) mirror([1,0,0]) frame3_cut(d1);
     }
 }
 
-module laser() {
+module frame3_laser() {
     d1_ = d1 < D_MIN ? 1 : d1;
-    main(d1_);
+    frame3_main(d1_);
 }
 
 //projection() main(d1);
-projection() laser();
+projection() frame3_laser();

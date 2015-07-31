@@ -27,7 +27,7 @@ x3 = y3*1/tan(a1);
 
 // габаритная длина
 x1 = 2*x3+76;
-echo(x1);
+echo(str("Габариты: ",x1," x ",y1));
 
 // длина
 //x3 = (x1-76)/2;
@@ -97,7 +97,7 @@ y12 = 25;
 // расстояние снизу до верхних шпилек
 y11 = 62+y12;
 
-module triangles() {
+module frame1_triangles() {
     // вырезы слева
     halfcube([x2,y2,dh],"z");
     translate([0,y1,0])rotate([0,0,-90])halfcube([y3,x3,dh],"z");
@@ -122,11 +122,11 @@ module triangles() {
     }
 }
 
-module main() {
+module frame1_main() {
     difference() {
         cube([x1,y1,dh]);
-        triangles();
-        translate([x1,0,0]) mirror([1,0,0]) triangles();
+        frame1_triangles();
+        translate([x1,0,0]) mirror([1,0,0]) frame1_triangles();
         // паз для верхней балки
         translate([x3+h9-x9/2,y1-y9,0])cube([x9,y9,dh]);
         // паз для нижней балки
@@ -134,4 +134,4 @@ module main() {
     }
 }
 
-projection() main();
+projection() frame1_main();
