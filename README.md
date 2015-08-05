@@ -33,7 +33,6 @@ Yandex.Money 4100171308229
 WebMoney WMR R367868798166
          WMZ Z377208196018
 
-BitCoin  1qYeAD3AQgpYTpsLHjsZDKReWE29sTL8z
 PayPal   andrew@answer.name
 
 Second case sender will be included into list of donors
@@ -46,4 +45,4 @@ If you want to help project with any sort of activity, materials and tools...
 If you try to open SibRaps foundry and want to consult...
 Ii you have questions and wishes...
 
-write to info@livelyminds.ru
+write via http://livelyminds.ru/contact
