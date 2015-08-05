@@ -12,15 +12,15 @@ x0 = 688;
 //color([0,0.5,0])translate([-dh,-dh,-dh])cube([x0,y0,dh]);
 
 module frame2_laser_cut() {
-    translate([275,345,0]) rotate([0,0,-60])
+    translate([270,340,0]) rotate([0,0,-58])
     difference() {
         frame2_laser();
-        xx1=22.5;
-        yy1=22.5;
-        halfcube([xx1,yy1,dh],"z");
+        xx1=20;
+        yy1=20;
+        //halfcube([xx1,yy1,dh],"z");
         translate([0,76,0])rotate([0,0,-90])halfcube([xx1,yy1,dh],"z");
         translate([412,0,0])rotate([0,0,90])halfcube([xx1,yy1,dh],"z");
-        translate([412,76,0])rotate([0,0,180])halfcube([xx1,yy1,dh],"z");
+        //translate([412,76,0])rotate([0,0,180])halfcube([xx1,yy1,dh],"z");
     }
 }
 
@@ -28,8 +28,8 @@ module frame3_laser_cut() {
     translate([270,352,0]) rotate([0,0,-55])
     difference() {
         frame3_laser();
-        xx1=22.5;
-        yy1=22.5;
+        xx1=20;
+        yy1=20;
         translate([0,40,0])rotate([0,0,-90])halfcube([xx1,yy1,dh],"z");
         translate([442,0,0])rotate([0,0,90])halfcube([xx1,yy1,dh],"z");
     }

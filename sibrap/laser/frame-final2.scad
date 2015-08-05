@@ -15,8 +15,8 @@ module frame2_laser_cut() {
     translate([275,345,0]) rotate([0,0,-60])
     difference() {
         frame2_laser();
-        xx1=22.5;
-        yy1=22.5;
+        xx1=20;
+        yy1=20;
         halfcube([xx1,yy1,dh],"z");
         translate([0,76,0])rotate([0,0,-90])halfcube([xx1,yy1,dh],"z");
         translate([412,0,0])rotate([0,0,90])halfcube([xx1,yy1,dh],"z");
@@ -25,11 +25,11 @@ module frame2_laser_cut() {
 }
 
 module frame3_laser_cut() {
-    translate([270,352,0]) rotate([0,0,-55])
+    translate([270,350,0]) rotate([0,0,-55])
     difference() {
         frame3_laser();
-        xx1=22.5;
-        yy1=22.5;
+        xx1=20;
+        yy1=20;
         translate([0,40,0])rotate([0,0,-90])halfcube([xx1,yy1,dh],"z");
         translate([442,0,0])rotate([0,0,90])halfcube([xx1,yy1,dh],"z");
     }

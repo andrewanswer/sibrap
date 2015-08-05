@@ -51,7 +51,7 @@ module frame2_cut(d1,d4) {
         translate([(dx-x21)/2,dx/2,dh/2])cube([x21,d2,dh],true);
     }
     // вырез под крепление направляющей Z
-    translate([0,(y1-dx)/2,0])cube([x3,y3,dh]);
+    translate([0,(y1-y3)/2,0])cube([x3,y3,dh]);
     // вырез под раму
     translate([(x1-dx4)/2,0,0])cube([x4,y4,dh]);
     translate([(x1-dx4)/2,y1-y4,0])cube([x4,y4,dh]);
