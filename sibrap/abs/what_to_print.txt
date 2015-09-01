@@ -1,0 +1,15 @@
+Печатать нужно
+
+base_plate01
+base_plate02
+base_plate03
+base_plate04
+carriage-part01
+carriage-part02
+carriage-part03
+carriage-part04
+head-part01
+head-part02
+head-part04
+
+по 1 шт

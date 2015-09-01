@@ -1,1 +1,0 @@
-linear_extrude() import(file="test2.dxf", layer="Default");

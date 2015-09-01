@@ -134,4 +134,8 @@ module frame1_main() {
     }
 }
 
+module frame1_laser() {
+    frame1_main();
+}
+
 projection() frame1_main();
