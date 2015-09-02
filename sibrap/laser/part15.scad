@@ -1,5 +1,6 @@
 $fn=30;
 DELTA=0.1;
+module part15() {
 difference() {
 union() {
     cube([50,37,8],true);
@@ -23,3 +24,5 @@ union() {
         }
     }
 }
+}
+projection() part15();

@@ -1,5 +1,6 @@
 $fn=30;
 DELTA=0.1;
+module part14() {
 difference() {
 union() {
     cube([50,37,8],true);
@@ -15,3 +16,7 @@ union() {
         translate([0,-(73/2-15),0])cylinder(r=1.5,h=8+DELTA*2);
     }
 }
+}
+
+projection()
+part14();

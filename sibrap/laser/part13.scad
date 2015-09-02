@@ -1,33 +1,52 @@
 use <../abs/lib/halfcube.scad>
 
+// габариты
+// ширина
+x0=98;
+// высота
+y0=53.36;
+
+// от левого нижнего угла детали
+// до первого отверстия по X
+x1=10;
+// до первого отверстия по Y
+y1=8.36;
+// до оси двигателя по X
+x2=69;
+// до оси двигателя по Y
+y2=27;
+
+// между первым и вторым отверстием по X
+x3=16;
+// между первым и вторым отверстием по Y
+y3=25;
+
+// между краем детали и посадочными отверстиями
+x4=5.56;
+y4=6.02;
+
+// между отверстиями крепления двигателя
+dx=31;
+
 $fn=30;
 DELTA=0.1;
-translate([10,8.36,0])
+
+module part13() {
 difference() {
-    translate([-10,-8.36,0]) {
-union() {
-    translate([0,0,-4])cube([77.53,53.36,8]);
-    translate([69,27,0])rotate([0,0,60])cube([31+6.02*2,31+5.56*2,8],true);
-    //translate([25+22,0,0])cube([44,44,8],true);
-}
-}
-    translate([0,0,-4-DELTA]){
-        translate([-10,-8.36,0]) {
-            translate([0,39.94,0])mirror([0,1,0])halfcube([18.97,39.94-13.36,8+DELTA*2],"z");
-            translate([18.97,53.36,0])mirror([0,1,0])halfcube([41,53.36-39.94,8+DELTA*2],"z");
-            translate([0,39.94,0])cube([18.97,53.36-39.94,8+DELTA*2]);
-            translate([0,53.36,0])cube([77.53,53.36,8+DELTA*2]);
-            translate([0,-53.36,0])cube([77.53+DELTA*2,53.36,8+DELTA*2]);
-        }
+    linear_extrude(height=8,center=true)polygon(points=[[0,0],[0,13.36],[18.97,39.94],[98-30.99-9.32,y0],[98-30.99,y0],[98,35.46],[77.53,0]], paths=[[0,1,2,3,4,5,6]]);
+    translate([x1,y1,-4-DELTA]) {
         cylinder(r=4,h=8+DELTA*2);
-        translate([16,25,0])cylinder(r=4,h=8+DELTA*2);
-        translate([59,27-8.36,4+DELTA])rotate([0,0,60])translate([31+6.02*2,0,0])cube([31+6.02*2,31+5.56*2,8+DELTA*2],true);
-        translate([59,27-8,0])rotate([0,0,60]){
+        translate([x3,y3,0])cylinder(r=4,h=8+DELTA*2);
+        translate([x2-x1,y2-y1,0])rotate([0,0,-30]){
             cylinder(r=11,h=8+DELTA*2);
-            translate([-31/2,-31/2,0])cylinder(r=1.5,h=8+DELTA*2);
-            translate([-31/2,31/2,0])cylinder(r=1.5,h=8+DELTA*2);
-            translate([31/2,-31/2,0])cylinder(r=1.5,h=8+DELTA*2);
-            translate([31/2,31/2,0])cylinder(r=1.5,h=8+DELTA*2);
+            translate([-dx/2,-dx/2,0])cylinder(r=1.5,h=8+DELTA*2);
+            translate([-dx/2,dx/2,0])cylinder(r=1.5,h=8+DELTA*2);
+            translate([dx/2,-dx/2,0])cylinder(r=1.5,h=8+DELTA*2);
+            translate([dx/2,dx/2,0])cylinder(r=1.5,h=8+DELTA*2);
         }
     }
 }
+}
+
+//projection()
+part13();
