@@ -2,17 +2,17 @@ use <../abs/lib/halfcube.scad>
 
 // габариты
 // ширина
-x0=98;
+x0=94;
 // высота
-y0=53.36;
+y0=54;
 
 // от левого нижнего угла детали
 // до первого отверстия по X
-x1=10;
+x1=8;
 // до первого отверстия по Y
-y1=8.36;
+y1=8;
 // до оси двигателя по X
-x2=69;
+x2=x0-27;
 // до оси двигателя по Y
 y2=27;
 
@@ -20,10 +20,6 @@ y2=27;
 x3=16;
 // между первым и вторым отверстием по Y
 y3=25;
-
-// между краем детали и посадочными отверстиями
-x4=5.56;
-y4=6.02;
 
 // между отверстиями крепления двигателя
 dx=31;
@@ -33,11 +29,19 @@ DELTA=0.1;
 
 module part13() {
 difference() {
-    linear_extrude(height=8,center=true)polygon(points=[[0,0],[0,13.36],[18.97,39.94],[98-30.99-9.32,y0],[98-30.99,y0],[98,35.46],[77.53,0]], paths=[[0,1,2,3,4,5,6]]);
+    //linear_extrude(height=8, center=true)polygon(points=[[0,0], [0,13.36], [18.97,39.94], [98-30.99-9.32,y0], [98-30.99,y0], [98,35.46], [77.53,0]], paths=[[0,1,2,3,4,5,6]]);
+    union() {
+        linear_extrude(height=8, center=true)
+        polygon(points=[[x1,0], [0,x1], [0.45,10], [9.15,y1+y3+2], [x1+x3,y0-6], [x2-9,y0-6], [x2-3,y0], [x0-24,y0], [x0,y0-24], [x0,24], [x0-24,0]], paths=[[0,1,2,3,4,5,6,7,8,9,10]]);
+        hull() {
+            translate([x1,y1,-4])cylinder(r=16/2,h=8);
+            translate([x1+x3,y1+y3,-4])cylinder(r=30/2,h=8);
+        }
+    }
     translate([x1,y1,-4-DELTA]) {
         cylinder(r=4,h=8+DELTA*2);
         translate([x3,y3,0])cylinder(r=4,h=8+DELTA*2);
-        translate([x2-x1,y2-y1,0])rotate([0,0,-30]){
+        translate([x2-x1,y2-y1,0])rotate([0,0,-45]){
             cylinder(r=11,h=8+DELTA*2);
             translate([-dx/2,-dx/2,0])cylinder(r=1.5,h=8+DELTA*2);
             translate([-dx/2,dx/2,0])cylinder(r=1.5,h=8+DELTA*2);
@@ -48,5 +52,11 @@ difference() {
 }
 }
 
-//projection()
+module motor() {
+intersection(){
+    cube([42,42,8],true);
+    rotate([0,0,45])cube([38*sqrt(2),38*sqrt(2),8],true);
+}
+}
+projection()
 part13();

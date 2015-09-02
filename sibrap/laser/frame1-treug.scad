@@ -1,5 +1,5 @@
 include <frame0-config.scad>
-include <../abs/halfcube.scad>
+include <../abs/lib/halfcube.scad>
 
 // Рама для 3д-принтера SibRap
 // под любую толщину оргстекла
@@ -138,4 +138,5 @@ module frame1_laser() {
     frame1_main();
 }
 
-projection() frame1_main();
+projection()
+frame1_main();

@@ -5,7 +5,8 @@ difference() {
 union() {
     cube([50,37,8],true);
     cube([40,73,8],true);
-    translate([25+22,0,0])cube([44,44,8],true);
+    translate([25+3,0,0])cube([6,42,8],true);
+    translate([25+22,0,0])motor();
 }
     translate([-10,-33.25-DELTA/2,0])cube([6,6.5+DELTA,8+DELTA],true);
     translate([10,-33.25-DELTA/2,0])cube([6,6.5+DELTA,8+DELTA],true);
@@ -25,4 +26,13 @@ union() {
     }
 }
 }
-projection() part15();
+
+module motor() {
+intersection(){
+    cube([42,42,8],true);
+    rotate([0,0,45])cube([38*sqrt(2),38*sqrt(2),8],true);
+}
+}
+
+projection()
+part15();
