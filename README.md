@@ -19,7 +19,7 @@ Official project site - http://livelyminds.ru (Lively Minds)
 About authors
 -------------
 
-Andrew (Answer) Nuzhdov http://andrew.answer.name
+Andrew (Answer) Nuzhdov http://andrew.answer.name or http://answe.ru
 Will be continued...
 
 Project support
