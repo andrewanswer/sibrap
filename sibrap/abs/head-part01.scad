@@ -1,5 +1,6 @@
 include <config.scad>
 use <lib/halfcube.scad>
+use <head-part06.scad>
 
 /* ПАРАМЕТРЫ */
 // габариты
@@ -30,7 +31,8 @@ d3=14;
 d4=22.3;
 v=8;
 // канавка ремня, внешний диаметр
-d5=16-0.5; 
+d5=16; 
+d5_new=16-0.5; 
 d6=8;
 dz2=6;
 z6=(z-v)/2;
@@ -111,7 +113,7 @@ module belt() {
 				translate([-d6/2,-d6/2,0]) cube([d6/2,d6,v]);
 			}
 		}
-		translate([7,0,0]) bolt(z/2);
+		//translate([7,0,0]) bolt(z/2);
 	}
 }
 
@@ -122,8 +124,8 @@ module beltNew() {
 		difference() {
 			translate([1,0,z6])
 			union() {
-				cylinder(v,r=d5/2);
-				translate([-d5/2,-d5/2,0]) cube([d5/2,d5,v]);
+				cylinder(v,r=d5_new/2);
+				translate([-d5_new/2,-d5_new/2,0]) cube([d5_new/2,d5_new,v]);
 			}
 			//translate([1,0,z6])
 			//union() {
@@ -205,7 +207,7 @@ difference() {
 	translate([3+3,43,0]) beltNew();
 	translate([x-2,43,0]) mirror([1,0,0]) belt();
 
-	// 3 отверстия крепления головки
+    // 3 отверстия крепления головки
 	translate([x5-2,y5,0]) bolt(z);
 	//translate([x5-1,y5+dz,0]) bolt(z);
 	translate([x5+26,y5,0]) bolt(z);
@@ -235,6 +237,16 @@ difference() {
     translate([64,73.4,0]) Zazhim();
     translate([0,73.4,0]) Zazhim();
 }
+
+// зубцы в канавке ремня
+render() difference() {
+    translate([x-3,y/2+5.5,z/2-4])
+    union() {head_part06();
+    translate([0,0,0.5])head_part06();
+    cylinder(r=5,h=10-0.1);
+    }
+    translate([x+7,y/2+5.5,z/2])cube(14,true);
+}
 }
 
 
@@ -243,4 +255,5 @@ difference() {
 module head_part01() {
     mirror([1,0,0]) main();
 }
+
 head_part01();
