@@ -27,7 +27,6 @@ y1=8;
 // высота
 z1=3;
 
-DELTA=0.1;
 module quarter() {
 intersection() {
     cylinder(r=x2, h=z2);

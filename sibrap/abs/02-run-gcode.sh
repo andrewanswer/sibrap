@@ -33,3 +33,4 @@ cura -i profile.ini -s stl/base-plate01.stl -o gcode/base-plate01.gcode
 cura -i profile.ini -s stl/base-plate02.stl -o gcode/base-plate02.gcode
 cura -i profile.ini -s stl/base-plate03.stl -o gcode/base-plate03.gcode
 cura -i profile.ini -s stl/base-plate04.stl -o gcode/base-plate04.gcode
+cura -i profile.ini -s stl/base-plate05.stl -o gcode/base-plate05.gcode

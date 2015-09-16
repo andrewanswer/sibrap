@@ -173,6 +173,7 @@ difference() {
     cube([x,y,z]);
     // сечение
 	//translate([-1,-1,9])cube([x+2,y+2,z]);
+	//translate([-x/2,-y/2,-1])cube([x+2,y+2,z]);
 
     // отверстия подшипников LM8UU
     translate([-0.5,y2,z/2]) rotate([0,90,0]) cylinder(x4+0.5-xx1,r=d1/2);
@@ -226,9 +227,9 @@ difference() {
 	translate([x6+dz/2-d4/2,y5+dz/2-d4/2-2,z6]) cube([d4,d4/2+2,z]);
 	translate([x6+dz/2,y5+dz/2,-1]) cylinder(z+2,r=d4/2);
 
-	// гнезда под подшипники
+	// гнезда под подшипники и болт подачи
 	translate([x-61,41,-1-0.5]) cylinder(9,r=d4/2);
-	translate([x-61,41,8.5]) cylinder(10,r=13/2);
+	translate([x-61,41,8]) cylinder(10,r=13/2);
 	translate([x-61,41,z-2]) cylinder(9,r=d4/2);
     
     // зажимы LM8UU

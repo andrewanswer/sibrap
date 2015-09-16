@@ -62,3 +62,5 @@ openscad base-plate03.scad -o stl/base-plate03.stl
 echo "base-plate03 done"
 openscad base-plate04.scad -o stl/base-plate04.stl
 echo "base-plate04 done"
+openscad base-plate05.scad -o stl/base-plate05.stl
+echo "base-plate05 done"

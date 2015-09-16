@@ -34,7 +34,7 @@ x6=14;
 z6=5;
 
 module nut() {
-	translate([0,0,8.75])rotate([90,0,90])cylinder(z6,r=7/2,$fa=60);
+	translate([0,0,8.75])rotate([90,0,90])cylinder(z6,r=7/2,$fn=6);
 }
 module hole() {
 	translate([0,0,8.75])rotate([90,0,90])cylinder(5,r=d1/2,$fn=20);
@@ -79,7 +79,7 @@ difference() {
 	translate([x5,y6,10])cylinder(7,r=11,$fn=50);
 
 	// part19 nut
-	translate([x-4.5,y2-7,z2])rotate([-90,0,0])cylinder(y3,r=z3/2,$fa=60);
+	translate([x-4.5,y2-7,z2])rotate([-90,0,0])cylinder(y3,r=z3/2,$fn=6);
 	translate([x-6,y2-7,z2-z3/2+0.25])cube([7,y3,z3-0.5]);
 	translate([x-3,y4-1,z2])rotate([-90,0,0])cylinder(y5,r=d1/2,$fn=20);
 

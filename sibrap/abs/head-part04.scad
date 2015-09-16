@@ -27,9 +27,9 @@ module head_part04() {
 
 module SmoothHole() {
     // желтый болт
-	//translate([7,0,-1]) cylinder(r=1.5, h=10);
+	//translate([7,0,-1]) cylinder(r=1.5, h=10, $fn=6);
     // болт из нержавейки
-	translate([6.5,0,-1]) cylinder(r=1.5, h=10);
+	translate([6.5,0,-1]) cylinder(r=1.5, h=10, $fn=6);
 }
 
 
@@ -79,7 +79,7 @@ module WadeL_double_helix(){
 		// желтый болт
         //translate([0,0,-1])rotate([180,0,0])m8_hole_vert_with_hex(14.3,20);
         // болт из нержавейки
-		translate([0,0,-1])rotate([180,0,0])m8_hole_vert_with_hex(13.5,20);
+		translate([0,0,-1])rotate([180,0,0])m8_hole_vert_with_hex(13.4,20);
 
 //SmoothHole();
 
@@ -124,11 +124,6 @@ module WadesS_double_helix(){
 	height=25;
 	pressure_angle=30;
 
-//translate([10,0,0])cube([3,3,15]);
-//translate([-13,0,0])cube([3,3,6.3]);
-//translate([-12,0,-6.3])cube([3,3,6.3]);
-//translate([-12,0,-4.5])cube([10,3,4.5]);
-
 rotate([180,0,0]) difference() {
 		union(){
 		gear (number_of_teeth=teeth,
@@ -160,16 +155,6 @@ rotate([180,0,0]) difference() {
 			circles=circles,
 			twist=twist/teeth);
 
-		}
-// Дырки под болт
-		//translate([0,-5,10.7])cube([5.5,2.3,9],center = true);
-		//translate([0,0,9.7])rotate([0,90,-90])cylinder(r=1.7,h=20,$fn=12);
-		//translate([0,-10,10])cube([10,2,11],center = true);// chanfer3
-translate([0,0,11])		cylinder(r=45, h=10);
-		mirror([0,0,1]) translate([0,0,5]) cylinder(r=16.5/2, h=2); // shorter
-		mirror([0,0,1]) translate([0,0,3.5]) difference(){
-		cylinder(r=16.5/2, h=2);
-			cylinder(r1=16.5/2,r2=(16.5-3)/2,h=1);
 		}
 	}
 }

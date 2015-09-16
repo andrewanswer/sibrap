@@ -24,14 +24,18 @@ Arduino3 = [600,2000]*k;
 Arduino4 = [3550,2000]*k;
 echo(Arduino2-Arduino1,Arduino3-Arduino1);
 
-module ramps() {
-    difference() {
-        cube([RampsX,RampsY,RampsZ]);
+module ramps_holes() {
         translate([0,0,-1]) {
             translate(Arduino1)cylinder(r=r1,h=RampsZ+2);
             translate(Arduino2)cylinder(r=r1,h=RampsZ+2);
             translate(Arduino3)cylinder(r=r1,h=RampsZ+2);
         }
+}
+
+module ramps() {
+    difference() {
+        cube([RampsX,RampsY,RampsZ]);
+        ramps_holes();
     }
 }
 
@@ -71,7 +75,7 @@ x2 = 140;
 y2 = 149;
 // высота
 z2 = 84;
-// Компьютерный БП - гнезда для крепления
+// гнезда для крепления
 // длина
 xz2 = 95;
 // ширина
@@ -81,23 +85,27 @@ dx2 = 9;
 // смещение гнезд по Y
 dy2 = 7;
 
-module psu() {
-    color([0,0.7,0,0.4])
-    difference() {
-        cube([x2,y2,z2]);
+module psu_holes() {
         translate([dx2,dy2,-1]) {
             translate([xz2,0])cylinder(r=r1,h=z2+2);
             translate([xz2,yz2])cylinder(r=r1,h=z2+2);
             translate([0,yz2])cylinder(r=r1,h=z2+2);
             translate([0,0])cylinder(r=r1,h=z2+2);
         }
+}
+
+module psu() {
+    color([0,0.7,0,0.4])
+    difference() {
+        cube([x2,y2,z2]);
+        psu_holes();
     }
 // cooler
 color([0,0,0.7,0.4]){
     translate([x2-24,10,(z2-80)/2])cube([25,80,80]);
 // switch
 translate([x2-24,110,15])cube([25,20,15]);
-// plug
+// power
 translate([x2-24,95,15+15+20])cube([25,50,21]);
 }
 }
@@ -116,7 +124,7 @@ module two_treug(a,b,dx,dy) {
             halfcube([a,b,3],"z");
             translate([a+dx,b+dy,0])rotate([0,0,180])halfcube([a,b,3],"z");
 }
-module int1() {
+module int1(v) {
     difference() {
         translate([0,(y1-y2)/2,0])cube([x2+5,y2,2]);
         // block12v15a
@@ -128,12 +136,8 @@ module int1() {
         }
         translate([x2,y2+(y1-y2)/2,0])rotate([0,0,180])
         // psu
-        translate([dx2,dy2,-1]) {
-            translate([xz2,0])cylinder(r=r1,h=z2+2);
-            translate([xz2,yz2])cylinder(r=r1,h=z2+2);
-            translate([0,yz2])cylinder(r=r1,h=z2+2);
-            translate([0,0])cylinder(r=r1,h=z2+2);
-        }
+        if (v==1) psu_holes();
+        else if (v==2) translate([27,0,0]) psu_holes();
         // treug
         translate([5,13,-0.5])
             for(i=[0:2]) {
@@ -144,24 +148,17 @@ module int1() {
     }
 }
 
-module int2() {
+module int2(v) {
     difference() {
         translate([30,(y1-y2)/2+3,0])cube([x2-33,y2-6,2]);
         // ramps
         translate([RampsX+30,RampsY+45,0])rotate([0,0,180])
-        translate([0,0,-1]) {
-            translate(Arduino1)cylinder(r=r1,h=RampsZ+2);
-            translate(Arduino2)cylinder(r=r1,h=RampsZ+2);
-            translate(Arduino3)cylinder(r=r1,h=RampsZ+2);
-        }
+        if (v==1) ramps_holes();
+        else if (v==2) translate([0,60,0]) ramps_holes();
         translate([x2,y2+(y1-y2)/2,0])rotate([0,0,180])
         // psu
-        translate([dx2,dy2,-1]) {
-            translate([xz2,0])cylinder(r=r1,h=z2+2);
-            translate([xz2,yz2])cylinder(r=r1,h=z2+2);
-            translate([0,yz2])cylinder(r=r1,h=z2+2);
-            translate([0,0])cylinder(r=r1,h=z2+2);
-        }
+        if (v==1) psu_holes();
+        else if (v==2) translate([27,0,0]) psu_holes();
         // treug
         for(i=[0:3]) {
             translate([42,-18+int2_dy2*i,-0.5])two_treug(int2_dx1,int2_dy1,10,0);
@@ -175,13 +172,22 @@ module current() {
     color([0.7,0,0])translate([RampsX+30,RampsY+20,z1+z2+40])rotate([0,0,180])ramps();
 }
 
-module interfaced() {
-    block12v15a();
-    color([0.2,0.2,0.2,1.0])translate([0,0,z1+10])int1();
-    translate([x2,y2+(y1-y2)/2,z1+20])rotate([0,0,180])psu();
-    color([0.2,0.2,0.2,1.0])translate([0,0,z1+z2+30])int2();
-    color([0.7,0,0])translate([RampsX+30,RampsY+45,z1+z2+40])rotate([0,0,180])ramps();
+// v=1 - variant 1
+// v=2 - variant 2
+module interfaced(v) {
+    if (v==1) translate([-7,27.5,0])block12v15a();
+    else if (v==2) translate([-9,-27.5,0])block12v15a();
+    //block12v15a();
+    color([0.2,0.2,0.2,1.0])translate([0,0,z1+10])int1(v);
+    if (v==1) translate([x2,y2+(y1-y2)/2,z1+20])rotate([0,0,180])psu();
+    else if (v==2) translate([0,(y1-y2)/2,z1+20])psu();
+    color([0.2,0.2,0.2,1.0])translate([0,0,z1+z2+30])int2(v);
+    color([0.7,0,0])translate([RampsX+30,RampsY+45,z1+z2+40])rotate([0,0,180]){
+        if (v==1) ramps();
+        else if (v==2) translate([0,60,0]) ramps();
+    }
 }
 
 //current();
-interfaced();
+//interfaced(1);
+interfaced(2);

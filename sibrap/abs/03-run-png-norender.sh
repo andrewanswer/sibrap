@@ -33,3 +33,4 @@ openscad base-plate01.scad -o png/base-plate01.png
 openscad base-plate02.scad -o png/base-plate02.png
 openscad base-plate03.scad -o png/base-plate03.png
 openscad base-plate04.scad -o png/base-plate04.png
+openscad base-plate05.scad -o png/base-plate05.png

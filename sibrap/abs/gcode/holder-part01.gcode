@@ -1,4 +1,4 @@
-;Sliced at: Tue 01-09-2015 23:08:53
+;Sliced at: Wed 16-09-2015 14:15:20
 ;Basic settings: Layer height: 0.25 Walls: 1 Fill: 40
 ;Print time: #P_TIME#
 ;Filament used: #F_AMNT#m #F_WGHT#g
