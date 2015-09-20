@@ -34,3 +34,5 @@ openscad base-plate02.scad --render -o png/base-plate02.png
 openscad base-plate03.scad --render -o png/base-plate03.png
 openscad base-plate04.scad --render -o png/base-plate04.png
 openscad base-plate05.scad --render -o png/base-plate05.png
+
+openscad lcd.scad --render -o png/lcd.png
