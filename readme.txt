@@ -1,5 +1,5 @@
 СИБРАП - СИБИРСКАЯ РЕАЛИЗАЦИЯ РЕПРАП
-31 марта 2012
+31 марта 2012 - ...
 
 О проекте
 ---------
@@ -29,9 +29,6 @@ Yandex.Money 4100171308229
 WebMoney WMR R367868798166
          WMZ Z377208196018
 
-BitCoin  1qYeAD3AQgpYTpsLHjsZDKReWE29sTL8z
-PayPal   andrew@answer.name
-
 Во втором случае он будет упомянут в списке жертвователей,
 который будет включен в данный репозиторий проекта.
 
@@ -43,7 +40,7 @@ PayPal   andrew@answer.name
 нужны консультации...
 Если у вас есть вопросы и пожелания авторам...
 
-пишите на mind@livelyminds.ru
+пишите на http://livelyminds.ru/contact
 
 ==============================================================
 SIBRAP - REPRAP SIBERIAN IMPLEMENTATION
@@ -90,4 +87,4 @@ If you want to help project with any sort of activity, materials and tools...
 If you try to open SibRaps foundry and want to consult...
 Ii you have questions and wishes...
 
-write to mind@livelyminds.ru
+write to http://livelyminds.ru/contact

@@ -1,6 +1,7 @@
 include <config.scad>
 use <lib/halfcube.scad>
 use <head-part06.scad>
+use <../../dimensions/dim.scad>
 
 /* ПАРАМЕТРЫ */
 // габариты
@@ -41,38 +42,40 @@ y6=5;
 xx1=2; 
 
 /* РАЗМЕРЫ */
-/*color("Black")
+/*DOC_HEIGHT = 0;
+
+color("Black")
 translate([0, 0, DOC_HEIGHT])
 union() {
     // X top
-    dim(x1,y1,4,0);
-    translate([(x1-x2)/2,0,0])
-    dim(x2,y1,2,0);
-    translate([(x1-x5)/2,0,0])
-    dim(x5,y1,3,0);
-    translate([(x1-x6)/2,0,0])
-    dim(x6,y1,1,0);
+    //translate([(x1-x3)/2,0,0])
+    //dim(x3,y1,2,0);
 
     // X bottom
-    translate([(x1-x3)/2,0,0])
-    dim(x3,0,-2,0);
-    translate([(x1-x4)/2-r2,0,0])
-    dim(x4+2*r2,0,-1,0);
-    translate([-x7,0,0])
-    dim(x7,0,-1,0);
+    dim(-x,0,-2,0);
+    translate([-(x-x1)/2,0,0])
+    dim(-x1,0,-1,0);
+    //translate([(x1-x3)/2,0,0])
+    //dim(x,0,-2,0);
+    //translate([(x1-x4)/2,0,0])
+    //dim(x4,0,-1,0);
+    //translate([-x6,0,0])
+    //dim(x6,0,-1,0);
 
     // Y right
-    translate([(x1+x6)/2,y1-dh,0])
-    dim(y4,0,1,-90);
-    translate([(x1+x5)/2,y1,0])
-    dim(y5,0,1,-90);
+    translate([0,y,0])
+    dim(y,0,2,-90);
+    translate([0,y1,0])
+    dim(y1,0,1,-90);
+    //translate([(x1+x5)/2,y1,0])
+    //dim(y5,0,1,-90);
 
     // Y left
-    dim(y1,0,1,90);
-    translate([(x1-x4)/2-r1,0,0])
-    dim(y2,0,1,90);
-}
-*/
+    //dim(y1,0,1,90);
+    //translate([(x1-x4)/2,0,0])
+    //dim(y2,0,1,90);
+}*/
+
 
 /* МОДУЛИ */
 // болты М3

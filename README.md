@@ -1,9 +1,50 @@
-Sibrap
-======
+СИБРАП - СИБИРСКАЯ РЕАЛИЗАЦИЯ РЕПРАП
+31 марта 2012 - ...
 
-Reprap 3d-printer based on Kiparis GenX/Mendel frame and RAMPS electronic
+О проекте
+---------
 
+Проект представляет собой 3D-принтер, позволяющий создавать
+трехмерные объекты из пластика по его 3D-модели. Данный проект
+был создан на базе проекта RepRap http://reprap.org и принтера Gen X
+http://skb-kiparis.ru. Все файлы данного проекта выпущены под
+лицензией GPL v3 (см. файл license_ru.txt).
+
+Официальный сайт проекта - http://livelyminds.ru (Гибкие умы)
+
+Об авторах
+----------
+
+Андрей Нуждов http://answe.ru
+Будет дополняться...
+
+Поддержка проекта
+-----------------
+
+Любой желающий поддержать проект анонимно либо публично может
+перечислить любую сумму на следующие реквизиты:
+
+Yandex.Money 4100171308229
+
+WebMoney WMR R367868798166
+         WMZ Z377208196018
+
+Во втором случае он будет упомянут в списке жертвователей,
+который будет включен в данный репозиторий проекта.
+
+Развитие проекта
+----------------
+
+Все желающие помочь проекту делом, материалами или инструментами...
+Если вы хотите открыть мастерскую, производящую Сибрапы, и вам
+нужны консультации...
+Если у вас есть вопросы и пожелания авторам...
+
+пишите на http://livelyminds.ru/contact
+
+==============================================================
 SIBRAP - REPRAP SIBERIAN IMPLEMENTATION
+
 
 About project
 -------------
@@ -19,7 +60,7 @@ Official project site - http://livelyminds.ru (Lively Minds)
 About authors
 -------------
 
-Andrew (Answer) Nuzhdov http://andrew.answer.name or http://answe.ru
+Andrew (Answer) Nuzhdov http://andrew.answer.name
 Will be continued...
 
 Project support
@@ -33,6 +74,7 @@ Yandex.Money 4100171308229
 WebMoney WMR R367868798166
          WMZ Z377208196018
 
+BitCoin  1qYeAD3AQgpYTpsLHjsZDKReWE29sTL8z
 PayPal   andrew@answer.name
 
 Second case sender will be included into list of donors
@@ -45,4 +87,4 @@ If you want to help project with any sort of activity, materials and tools...
 If you try to open SibRaps foundry and want to consult...
 Ii you have questions and wishes...
 
-write via http://livelyminds.ru/contact
+write to http://livelyminds.ru/contact
