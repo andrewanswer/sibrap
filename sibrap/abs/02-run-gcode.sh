@@ -36,3 +36,5 @@ cura -i profile.ini -s stl/base-plate04.stl -o gcode/base-plate04.gcode
 cura -i profile.ini -s stl/base-plate05.stl -o gcode/base-plate05.gcode
 
 cura -i profile.ini -s stl/lcd.stl -o gcode/lcd.gcode
+cura -i profile.ini -s stl/frame-part02-z1.stl -o gcode/frame-part02-z1.gcode
+cura -i profile.ini -s stl/frame-part02-z2.stl -o gcode/frame-part02-z2.gcode

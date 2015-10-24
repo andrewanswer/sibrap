@@ -1,8 +1,8 @@
-;Sliced at: Sun 20-09-2015 04:38:59
+;Sliced at: Sun 25-10-2015 03:36:52
 ;Basic settings: Layer height: 0.25 Walls: 1 Fill: 40
-;Print time: 19 minutes
-;Filament used: 2.082m 6.0g
-;Filament cost: None
+;Print time: #P_TIME#
+;Filament used: #F_AMNT#m #F_WGHT#g
+;Filament cost: #F_COST#
 ;M190 S0 ;Uncomment to add your own bed temperature line
 ;M109 S0 ;Uncomment to add your own temperature line
 G21        ;metric values

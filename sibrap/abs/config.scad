@@ -9,3 +9,17 @@ DELTA=0.1;
 
 // толщина рамы
 FRAME=18;
+
+// расстояние от стенок до гайки
+DELTA_NUT = 0.3;
+// высота, макс. диаметр, между стенками (размер ключа)
+// гайка М3
+m3_base=[2.4,6.4,5.5];
+m3_hole=m3_base+[DELTA_NUT,DELTA_NUT,DELTA_NUT];
+//[3,7,6]
+// гайка М4
+m4_base=[3.2,8.1,6.9];
+m4_hole=m4_base+[DELTA_NUT,DELTA_NUT,DELTA_NUT];
+// гайка М5
+m5_base=[3.8,9.1,7.9];
+m5_hole=m5_base+[DELTA_NUT,DELTA_NUT,DELTA_NUT];

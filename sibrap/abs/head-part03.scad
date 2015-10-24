@@ -59,6 +59,10 @@ difference(){
 		translate([x-4.5,0,z1])rotate([-90,0,0])cylinder(y,r=d6/2,$fn=50);
 	}
 	translate([x-4.5,-1,z1])rotate([-90,0,0])cylinder(y+2,r=d5/2,$fn=20);
+    // bearing
+	translate([x1,y/2+h1/2,z0])rotate([90,0,0])cylinder(h1,r=d1/2,$fn=50);
+    translate([x1,y/2,d1/2+z0])cube([d1,h1,d1],true);
+
 }
 }
 }

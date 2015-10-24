@@ -67,3 +67,7 @@ echo "base-plate05 done"
 
 openscad lcd.scad -o stl/lcd.stl
 echo "lcd done"
+openscad frame-part02-z1.scad -o stl/frame-part02-z1.stl
+echo "frame-part02-z1 done"
+openscad frame-part02-z2.scad -o stl/frame-part02-z2.stl
+echo "frame-part02-z2 done"
