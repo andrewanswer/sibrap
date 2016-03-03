@@ -23,7 +23,7 @@ module table_part01() {
 		hole(31,5);
 		translate([5,-1,5]) rotate([-90,0,0]) {
 			translate([10,0,0]) rotate([-90,0,0]) {
-				translate([3,-10,-28]) cylinder(30,r=d1/2);
+				translate([3,-10,-28]) cylinder(30,r=d1/2,$fn=40);
 				translate([3,-10,0]) rotate([0,0,90]) cylinder(20,r=d2/2);
 			}
 		}
@@ -31,7 +31,7 @@ module table_part01() {
 	translate([9,0,0])	difference() {
 		cube([18,18,32]);
 		translate([9,9,-1]) cylinder(25,r=d2/2);
-		translate([9,9,4]) cylinder(30,r=d1/2);
+		translate([9,9,4]) cylinder(30,r=d1/2,$fn=40);
 
 // отверстия для извлечения подшипников
 		translate([3,5.8,-1]) cylinder(25,r=0.8);

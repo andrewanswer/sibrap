@@ -148,7 +148,7 @@ module ushko() {
         Ushki();
         Zazhim();
         // вырезы в креплениях подшипников
-        translate([-xx1-0.5,-1-5,5]) cube([28,y1,8]);
+        translate([-xx1+3,-6,5]) cube([24,y1,8]);
         // отверстия подшипников LM8UU
         translate([-0.5,y2,z/2]) rotate([0,90,0]) cylinder(x4+0.5-xx1,r=d1/2);
     }
@@ -200,10 +200,10 @@ difference() {
     translate([(x-x1)/2,y-y1+1,-1]) cube([x1,y1-2,z+2]);
 
     // вырезы в креплениях подшипников
-    translate([-xx1-0.5+4,-6,5]) cube([28-4,y1,8]);
-    translate([-xx1-0.5+4,y-y1+6,5]) cube([28-4,y1,8]);
-    translate([62+xx1+0.5,-6,5]) cube([28-4,y1,8]);
-    translate([62+xx1+0.5,y-y1+6,5]) cube([28-4,y1,8]);
+    translate([-xx1-0.5+6,-6,5]) cube([28-6,y1,8]);
+    translate([-xx1-0.5+6,y-y1+6,5]) cube([28-6,y1,8]);
+    translate([62+xx1+0.5,-6,5]) cube([28-6,y1,8]);
+    translate([62+xx1+0.5,y-y1+6,5]) cube([28-6,y1,8]);
 
 	// канавка под ремень по всей длине
 	translate([-1,24,z6]) cube([x+2,y6,v]);
